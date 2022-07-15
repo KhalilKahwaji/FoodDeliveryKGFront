@@ -247,6 +247,14 @@ header .icons #menu-bars{
     background-color: var(--light-color);
 }
 
+.dishes h1,
+.dishes h3
+{
+    color: black;
+    font-size: 5rem;
+    text-align: center;
+}
+
 .dishes .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
