@@ -123,6 +123,31 @@ label{
         }
     }
     </style>
+
+<script>
+  
+  var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 3) {
+               var myObj= JSON.parse(xhr.responseText);
+              
+                var sel= document.getElementById("selector");
+                for (let i = 0; i < myObj.length ; i++) {
+                var option= document.createElement("option");
+                option.value="";
+                option.text= myObj[i].categoryname;
+                sel.add(option);
+                } 
+            }
+        }
+        xhr.open('get', 'http://localhost:5236/api/RestaurantCategory', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.send();
+      
+      
+</script>
+
+
 </head>
 <body>
     <body>
@@ -142,8 +167,14 @@ label{
                  <label for="name">Restaurant Name</label>
                  <input type="text" name="name" id="name" placeholder="Restaurant Name" required autofocus>
                  <label for="">Restaurant Category</label>
-                 <select name="restCateg">
-                    <option value="">Select Restaurant Category</option></select>
+
+
+
+                 <select name="restCateg" id="selector">
+                    </select>
+
+
+
 
                  <label for="username">Phone</label>
                  <input type="tel" name="phone" id="phone" placeholder="phone" required>
