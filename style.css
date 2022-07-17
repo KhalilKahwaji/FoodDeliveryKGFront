@@ -389,7 +389,9 @@ header .icons #menu-bars{
 	font: bold 16px sans-serif;
 	padding: 5px 5px;
     bottom: 0;
-    position: absolute;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
 }
 
 .footer-distributed .footer-left,
@@ -564,3 +566,9 @@ header .icons #menu-bars{
 
 }
 
+footer{
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+}

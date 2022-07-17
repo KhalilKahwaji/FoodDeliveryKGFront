@@ -440,3 +440,27 @@ p {
     color:#ccc;
 }
 
+header .icons i,
+header .icons a{
+    cursor: pointer;
+    margin-left: .5rem;
+    height:4.5rem;
+    line-height: 4.5rem;
+    width:4.5rem;
+    text-align: center;
+    font-size: 1.7rem;
+    background:var(--light-color);
+    border-radius: 50%;
+    color: #fff;
+}
+
+header .icons i:hover,
+header .icons a:hover{
+    color:#fff;
+    background: var(--light-color);
+    transform: rotate(360deg);
+}
+
+header .icons #menu-bars{
+    display: none;
+}
