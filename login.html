@@ -135,11 +135,33 @@ button{
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password">
 
-        <button>Log In</button>
+        
         <div>
           <p class="message">New Customer? <a href="customerRegister.html">Create an account</a></p>
           <p class="message">New Restaurant? <a href="restauRegister.html">Create an account</a></p>
         </div>
+       
+       
     </form>
+    <input type="submit" value="Login" onclick="submit()">
+    <script type="text/javascript">
+        function submit() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 3) {
+                    alert(xhr.response);
+                }
+            }
+            var str="http://localhost:5236/api/Users/";
+            str+= document.getElementById('username').value;
+            str+="/";
+            str+= document.getElementById('password').value;
+            xhr.open('get', str, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            xhr.send();
+            
+        }
+    
+    </script>
 </body>
 </html>
