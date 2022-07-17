@@ -106,7 +106,7 @@ button{
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
-    border-radius: 5px;
+    border-radius: 5px; 
     cursor: pointer;
 }
 
@@ -134,7 +134,7 @@ button{
 
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password">
-
+        <label><input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password</label>
         
         <div>
           <p class="message">New Customer? <a href="customerRegister.html">Create an account</a></p>
@@ -165,3 +165,17 @@ button{
     </script>
 </body>
 </html>
+<script>
+    function myFunction() {
+    var x = document.getElementById("password");
+    
+    if (x.type === "password" ) {
+         x.type = "text";
+       
+    } else {
+         x.type = "password";
+         
+            }
+ 
+    }
+    </script>

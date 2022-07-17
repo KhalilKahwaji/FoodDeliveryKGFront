@@ -1,0 +1,442 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main styling */
+html,body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7em; /*space between the ligns */
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+ 
+h1, h2, h3 {
+    padding-bottom: 20px;
+}
+
+h4 {
+    padding-top: 250px;
+    font-size: 50px;
+    color: #333;
+    width: 1050px;
+    height: 500px;
+    overflow: hidden;
+    line-height: 1.2em;
+}
+
+p {
+    margin: 10px 0;/*10 for top and bottom,0 for left and right */
+}
+
+/*Utility classes */
+.container{
+    margin: auto; /* push to the middle */
+    max-width: 1100px;
+    overflow: auto;
+    padding: 0 20px;
+}
+
+.text-primary {
+    color: gold;
+}
+
+.lead {
+    font-size: 20px;
+}
+
+.abc {
+    display: inline-block;
+    font-size: 18px;
+    color: white;
+    background: #333;
+    padding: 13px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.abc:hover {
+    background: gold;
+    color: #333;
+}
+
+.abc-light {
+    background: #f4f4f4;
+    color: #333;
+}
+
+.bg-dark {
+    background: #333;
+    color: white;
+}
+
+.bg-light {
+    background: #f4f4f4;
+    color:#333;
+}
+
+.bg-primary {
+    color: #333;
+    background:gold;
+}
+
+.clear {
+    clear:both; /* because the boxes are floated */
+}
+
+.l-heading {
+    font-size: 40px;
+}
+
+/* Padding */
+.py-1 {
+    padding: 10px 0;
+}
+.py-2 {
+    padding: 20px 0;
+}
+.py-3 {
+    padding: 30px 0;
+}
+/* Navbar */
+#navbar {
+    background: #333;
+    color:#fff;
+    overflow:auto; /* background shows no matter what */
+}
+
+#navbar a {
+    color: white;
+}
+
+#navbar h1 {
+    float: left;
+    padding-top: 20px;
+}
+
+#navbar ul {
+    float: right;
+    list-style: none;
+}
+
+#navbar ul li{
+    float: left;
+}
+
+#navbar ul li a {
+    display: block;
+    padding: 20px;
+    text-align: center  ;
+}
+
+#navbar ul li a:hover{
+    background: #444;
+    color: gold;
+} 
+
+#navbar ul li a.current{   /* home word color */
+    background: #444;
+    color: gold;
+} 
+
+/* showcase */
+#showcase {
+    background: url('../images/hot2.jpg') no-repeat 
+    center center/cover;
+    height: 600px;
+}
+
+#showcase .showcase-content {
+    color:white;
+    text-align: center;
+    padding-top: 170px;
+}
+
+#showcase .showcase-content h1 {
+    font-size: 60px;
+    line-height: 1.2em;
+
+}
+
+#showcase .showcase-content p {
+    padding-bottom: 20px;
+    line-height: 1.7em;
+}
+
+/*Home info */
+#home-info {
+    height: 400px;
+}
+
+#home-info .info-img {
+    float: left;
+    width: 50%;
+    background: url('../images/hot2.jpg') no-repeat;
+    min-height: 100%; /*full space */
+}
+
+#home-info .info-content {
+    float: right;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    padding: 50px 30px;
+    overflow: hidden;
+}
+
+#home-info .info-content p {
+    padding-bottom: 30px;
+}
+
+/* Features */
+.box {
+    float: left;
+    width: 33.3%;
+    padding: 50px;
+    text-align: center;
+}
+
+.box i {
+    margin-bottom: 10px;
+}
+
+/* About Info */
+#about-info .info-right{
+     float: right;
+     width: 50%;
+     min-height: 100%;
+}
+
+#about-info .info-right img {
+    display: block;
+    margin: auto;
+    width: 70%;
+    border-radius: 50%;
+}
+
+#about-info .info-left {
+    float: left;
+    width: 50%;
+    min-height: 100%;
+}
+
+/* Testimonials */
+#testimonials {
+    height: 600px;
+    background: url('../images/hot.jpg') no-repeat
+    center center/cover ;
+    padding-top: 100px;
+}
+
+#testimonials h2 {
+    color: white;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+#testimonials .testimonial {
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    opacity: 0.9;
+}
+
+#testimonials .testimonial img {
+    width: 100px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;    
+}
+
+/*  Contact Form */
+#contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+#contact-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px #ddd solid;
+}
+
+#contact-form textarea {
+      height: 200px;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color:gold;
+}
+
+/* Footer */
+#main-footer {
+    text-align: center;
+    background: #444;
+    color: white;
+    padding: 20px;
+}
+
+/*Clock */
+#review {
+    background: url('../images/hot4.jpg') no-repeat 
+    center center/cover;
+    height: 600px;
+}
+
+.clock {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #444;
+    font-size: 60px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+}
+
+
+/*tipCalculator */
+
+
+#review1 {
+    background: url('../images/hot5.jpg') no-repeat 
+    center center/cover ;
+    height: 600px;
+}
+
+#review1,
+#billamt {
+    font-size: 14px;
+    /*color: #2980b9;*/
+    color:#444;
+    background-color:white;
+    width: 60%;
+    padding: 5px 5px 8px 8px;
+  }
+
+  #review1,
+  #billamt:focus {
+    background: #fff;
+    border: 3px solid #444;
+    outline: none;
+  }
+  
+  #review1,
+  #peopleamt {
+    width: 60%;
+    padding: 5px 5px 8px 8px;
+    margin-left: 20px;
+    font-size: 14px;
+  }
+  
+  #review1  .dollarSign {
+    display: inline;
+  }
+
+  #review1,
+  #serviceQual {
+    padding: 13px 13px 20px 20px;
+    margin-left: 20px;
+    font-size: 25px;
+  }
+  
+  button {   /*Calculate button */
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin: 30px auto;
+    background:#333;
+    border-radius: 5px;
+    width: 200px;
+    height: 50px;
+    font-size: 17px;
+    color: white;
+  }
+  
+  button:hover {
+    background:gold;
+    border-bottom-color:#444;
+  }
+  
+  button:active {
+    position: relative;
+    top: 1px;
+  }
+
+  #review1,
+  #totalTip {
+    font-size: 30px;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  #review1,
+  #totalTip:before {
+    content: "Tip amount";
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    text-transform: uppercase;
+  }
+  #review1,
+  #totalTip sup {
+    font-size: 20px;
+    top: -18px;
+  }
+  #review1,
+  #totalTip small {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+  }
+
+  #review1 h1 {
+    background: #444;
+    color: white;
+    margin: 0;
+    padding: 10px 100px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: normal;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+  #section2 {
+    background: url('../images/hot5.jpg') no-repeat 
+    center center/cover ;
+    height: 600px;
+  }
+
+
+  .rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+
