@@ -163,16 +163,18 @@ label{
                  
                  
                  <label for="submit"></label>
-                 <input type="submit" name="submit" id="submit" value="REGISTER" onclick="fun()">
               </fieldset>
               <div
                  class="message">Already have an account?<a href="login.html">Login</a>
                 
               </div>
            </form>
+           <input type="submit" name="submit" id="submit" value="REGISTER" onclick="fun()">
+
         </div>
      </body>
 </html>
+
 <script>
     function myFunction() {
     var x = document.getElementById("password");
@@ -207,11 +209,56 @@ label{
 }
 
 function fun(){
+
+
+var username= document.getElementById('username').value;
+var fname= document.getElementById('firstname').value;
+var lname= document.getElementById('lastname').value;
+var password= document.getElementById('password').value;
+var phoneNumber= document.getElementById('phone').value;
+var address= document.getElementById('address').value;
+
     if (document.getElementById('password').value != "" &&
      document.getElementById('copassword').value != "") {
+        
+        
+      
+
+//////////////
+
+
+
+let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:5236/api/Users");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = () => console.log(xhr.responseText);
+
+        let data = `{  
+  "fname": "`+fname+`",
+  "lname": "`+lname+`",
+  "username": "`+username+`",
+  "password": "`+password+`",
+  "phoneNumber": `+phoneNumber+`,
+  "address": "`+address+`"
+}`;
+        
+        xhr.send(data);
+      
+        
+
+
+////////////////
+
+
+
      alert("Your response is submitted");
- } else {
+}else {
      alert("Please fill all the fields");
  }
+
+
+
 }
  </script>
