@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KG Food Order | Restaurants</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+  
+        var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 3) {
+                     var myObj= JSON.parse(xhr.responseText);
+                    
+                      var sel= document.getElementById("selector");
+                      for (let i = 0; i < myObj.length ; i++) {
+                      var option= document.createElement("option");
+                      option.value="";
+                      option.text= myObj[i].categoryname;
+                      sel.add(option);
+                      } 
+                  }
+              }
+              xhr.open('get', 'http://localhost:5236/api/RestaurantCategory', true);
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+              xhr.send();
+            
+            
+      </script>
+      
+
+</head>
+<body>
+<header>
+    <a href="index.html" class="logo"><img src="logo.png"></a>
+
+    <nav class="navbar">
+        <a  href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a class="active" href="restaurant.html">Restaurants</a>
+        
+    </nav>
+
+    <div class="icons">
+        <i class="fas fa-bars" id="menu-bars"></i>
+        <i class="fas fa-search" id="search-icon"></i>
+        <a href="cart.html" class="fas fa-shopping-cart"></a>
+    </div>
+
+</header>
+<div class="filter-grid">
+    <div class="inner-wrap">
+      <div class="filter-cell">
+        <select class="form-control">
+            
+
+
+
+            <select name="restCateg" id="selector">
+          
+        </select>
+      </div>
+      <div class="filter-cell">
+        <select class="form-control">
+          <option  value="*">Product Type</option>
+      
+        </select>
+      </div>
+     
+    </div>
+  </div>
+
+</body>
+</html>
