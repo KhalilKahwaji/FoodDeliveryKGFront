@@ -17,26 +17,29 @@
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
-    </div>
-    <form>
-        <h3>Login Here</h3>
-
-        <label for="username">Username</label>
-        <input type="text" placeholder="Username" id="username">
-
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
-        <label><input type="checkbox" id="showpasscheckbox" style="height: 15px;" onclick="myFunction()">Show Password</label>
+    <div>
+        <form >
+            <h3>Login Here</h3>
+    
+            <label for="username">Username</label>
+            <input type="text" placeholder="Username" id="username">
+    
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" id="password">
+            <p class="message">Show Password<input   type="checkbox" id="showpasscheckbox" style="height: 15px;" onclick="myFunction()"></p>
+            
+            <div>
+              <p class="message">New Customer? <a href="customerRegister.html">Create an account</a></p>
+              <p class="message">New Restaurant? <a href="restauRegister.html">Create an account</a></p>
+            </div>
+           
+           
+        </form>
         
-        <div>
-          <p class="message">New Customer? <a href="customerRegister.html">Create an account</a></p>
-          <p class="message">New Restaurant? <a href="restauRegister.html">Create an account</a></p>
-        </div>
-        <input type="submit" value="Login" onclick="submit()">
-       
-    </form>
+        <button type="button" onclick="submit()" style="position: absolute; top:95%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Login</button> 
+    </div>
 
-    <Buttpn  value="Login" onclick="submit()"></Buttpn>
+   
     <script type="text/javascript">
         function submit() {
 

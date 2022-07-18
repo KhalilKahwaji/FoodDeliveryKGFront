@@ -102,7 +102,17 @@ form *{
     outline: none;
     border: none;
 }
-
+button{
+margin-top: 50px;
+width: 100%;
+background-color: #ffffff;
+color: #080710;
+padding: 15px 0;
+font-size: 18px;
+font-weight: 600;
+border-radius: 5px; 
+cursor: pointer;
+}
 label{
     display: block;
     margin-top: 1px;
@@ -134,42 +144,44 @@ label{
             <div class="shape"></div>
         </div>
         <div id="container">
-           
-           <form >
-            <h3>Customer-Registration</h3>
-              <fieldset>
-                 
-                 <label for="username">Username</label>
-                 <input type="text" name="username" id="username" placeholder="Username" required autofocus>
-                 <div class="form-check form-check-inline">
-                 <label for="username">First Name</label>
-                 <input type="text" name="firstname" id="firstname" placeholder="First Name" required autofocus>
-                 <label for="username">Last Name</label>
-                 </div>
-                 <input type="text" name="lastname" id="lastname" placeholder="Last Name" required autofocus>
-                 <label for="username">Phone</label>
-                 <input type="tel" name="phone" id="phone" placeholder="phone" required>
-                 
-                 <label for="username">Address</label>
-                 <input type="text" name="address" id="address" placeholder="Address" required>
-                 
-                 <label for="username">Password</label>
-                 <input type="password" name="password" id="password" placeholder="Password" required>
-                 <label for="username">Comfirm Password</label>
-                 <input type="password" name="copassword" id="copassword" placeholder="Comfirm Password" required onkeyup="validate_password()">
-                 <input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password
-                  <span id="wrong_pass_alert"></span>
-                 <br>
-                 
-                 
-                 <label for="submit"></label>
-              </fieldset>
-              <div
-                 class="message">Already have an account?<a href="login.html">Login</a>
-                
-              </div>
-           </form>
-           <input type="submit" name="submit" id="submit" value="REGISTER" onclick="fun()">
+           <div>
+            <form >
+                <h3>Customer-Registration</h3>
+                  <fieldset>
+                     
+                     <label for="username">Username</label>
+                     <input type="text" name="username" id="username" placeholder="Username" required autofocus>
+                     <div class="form-check form-check-inline">
+                     <label for="username">First Name</label>
+                     <input type="text" name="firstname" id="firstname" placeholder="First Name" required autofocus>
+                     <label for="username">Last Name</label>
+                     </div>
+                     <input type="text" name="lastname" id="lastname" placeholder="Last Name" required autofocus>
+                     <label for="username">Phone</label>
+                     <input type="tel" name="phone" id="phone" placeholder="phone" required>
+                     
+                     <label for="username">Address</label>
+                     <input type="text" name="address" id="address" placeholder="Address" required>
+                     
+                     <label for="username">Password</label>
+                     <input type="password" name="password" id="password" placeholder="Password" required>
+                     <label for="username">Comfirm Password</label>
+                     <input type="password" name="copassword" id="copassword" placeholder="Comfirm Password" required onkeyup="validate_password()">
+                     <input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password
+                      <span id="wrong_pass_alert"></span>
+                     <br>
+                     
+                     
+                     <label for="submit"></label>
+                  </fieldset>
+                  <div
+                     class="message">Already have an account?  <a style="color:rgb(255, 208, 0);"  href="login.html">Login</a>
+                    
+                  </div>
+               </form>
+        <button type="button" onclick="fun()" style=" width:26%; position: absolute; top:90%; left:37%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Register</button> 
+           </div>
+          
 
         </div>
      </body>
