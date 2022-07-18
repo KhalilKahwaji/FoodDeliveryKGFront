@@ -250,10 +250,13 @@ p {
 
 /* Footer */
 #main-footer {
+    position: fixed;
+    bottom:0; left: 0; right:0;
     text-align: center;
     background: #444;
     color: white;
     padding: 20px;
+ 
 }
 
 /*Clock */
@@ -1041,10 +1044,4 @@ header .icons #menu-bars{
     padding: 0 0px;
 }
 
-#main-footer {
-    text-align: center;
-    background: #444;
-    color: white;
-    padding: 40px;
-}
 
