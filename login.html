@@ -32,11 +32,11 @@
           <p class="message">New Customer? <a href="customerRegister.html">Create an account</a></p>
           <p class="message">New Restaurant? <a href="restauRegister.html">Create an account</a></p>
         </div>
-       
+        <input type="submit" value="Login" onclick="submit()">
        
     </form>
 
-    <input type="submit" value="Login" onclick="submit()">
+    <Buttpn  value="Login" onclick="submit()"></Buttpn>
     <script type="text/javascript">
         function submit() {
 
@@ -79,7 +79,7 @@
         function login(info) {
 
             var myObj= JSON.parse(info);
-            alert(myObj[0].userid);
+            //alert(myObj[0].userid);
             
             
             /*
