@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     <!--Stylesheet-->
+
+
+
     <style media="screen">
       *,
 *:before,
@@ -120,6 +123,8 @@ button{
   text-decoration: none;
 }
     </style>
+
+
 </head>
 <body>
     <div class="background">
@@ -134,7 +139,7 @@ button{
 
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password">
-        <label><input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password</label>
+        <label><input type="checkbox" id="showpasscheckbox" style="height: 15px;" onclick="myFunction()">Show Password</label>
         
         <div>
           <p class="message">New Customer? <a href="customerRegister.html">Create an account</a></p>
@@ -149,13 +154,20 @@ button{
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 3) {
-                    alert(xhr.response);
+                    if(xhr.response!= "[]"){
+                        alert("logging in")
+                    }else{
+                        alert("wrong username or password")
+
+                    }
+                
                 }
             }
             var str="http://localhost:5236/api/Users/";
             str+= document.getElementById('username').value;
             str+="/";
             str+= document.getElementById('password').value;
+
             xhr.open('get', str, true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             xhr.send();
@@ -168,8 +180,9 @@ button{
 <script>
     function myFunction() {
     var x = document.getElementById("password");
+    var cbox= document.getElementById("showpasscheckbox");
     
-    if (x.type === "password" ) {
+    if (cbox.checked ) {
          x.type = "text";
        
     } else {
