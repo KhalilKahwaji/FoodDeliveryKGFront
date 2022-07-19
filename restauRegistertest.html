@@ -2,18 +2,11 @@
 <html lang="en">
 <head>
   
-    <title>Customer-Registration</title>
+    <title>Restaurant-Registration</title>
  
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    
-
-    <script>
-document.getElementById("checkbox").checked= false;
-    </script>
-
-    
     <style>
         html {
     height: 100%;
@@ -68,7 +61,7 @@ fieldset {
     text-align: center;
 }
 
-input{
+input,select{
     display: block;
     height: 40px;
     width: 100%;
@@ -81,14 +74,12 @@ input{
 }
 
 
-
-
 ::placeholder {
     color: #d3d3d3;
 }
 
 form{
-    height: 600px;
+    height: 625px;
     width: 400px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -119,12 +110,12 @@ font-weight: 600;
 border-radius: 5px; 
 cursor: pointer;
 }
+
 label{
     display: block;
     margin-top: 1px;
     font-size: 16px;
-    font-weight: bolder;
-
+    font-weight: 50;
     text-align: left;
 }
 
@@ -143,6 +134,33 @@ label{
         }
     }
     </style>
+
+<script>
+  
+ 
+
+  var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 3) {
+               var myObj= JSON.parse(xhr.responseText);
+               const sel= document.getElementById("selector");
+                
+                for (let i = 0; i < myObj.length ; i++) {
+                  var txt= (i+1)+"-"+myObj[i].categoryname;
+                 
+                    const option = new Option(txt ,txt);
+                    sel.add(option, undefined);
+                } 
+            }
+        }
+        xhr.open('get', 'http://localhost:5236/api/RestaurantCategory', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.send();
+      
+      
+</script>
+
+
 </head>
 <body>
     <body>
@@ -153,47 +171,56 @@ label{
         <div id="container">
            <div>
             <form >
-                <h3>Customer-Registration</h3>
+                <h3>Restaurant-Registration</h3>
                   <fieldset>
                      
                      <label for="username">Username</label>
                      <input type="text" name="username" id="username" placeholder="Username" required autofocus>
-                     <div class="form-check form-check-inline">
-                     <label for="username">First Name</label>
-                     <input type="text" name="firstname" id="firstname" placeholder="First Name" required autofocus>
-                     <label for="username">Last Name</label>
-                     </div>
-                     <input type="text" name="lastname" id="lastname" placeholder="Last Name" required autofocus>
+                    
+                     <label for="name">Restaurant Name</label>
+                     <input type="text" name="name" id="name" placeholder="Restaurant Name" required autofocus>
+                     <label for="">Restaurant Category</label>
+    
+    
+    
+                     <select name="restCateg" id="selector">
+                         
+                        </select>
+    
+    
+    
+    
                      <label for="username">Phone</label>
                      <input type="tel" name="phone" id="phone" placeholder="phone" required>
                      
-                     <label for="username">Address</label>
+                     <label for="">Address</label>
                      <input type="text" name="address" id="address" placeholder="Address" required>
                      
-                     <label for="username">Password</label>
+                     <label for="">Password</label>
                      <input type="password" name="password" id="password" placeholder="Password" required>
-                     <label for="username">Comfirm Password</label>
+                     <label for="">Comfirm Password</label>
                      <input type="password" name="copassword" id="copassword" placeholder="Comfirm Password" required onkeyup="validate_password()">
-                     <input type="checkbox" style="height: 15px;" id="checkbox" onclick="myFunction()">Show Password
+                     <input type="checkbox" style="height: 15px;" id="testing" onclick="myFunction()">Show Password
                       <span id="wrong_pass_alert"></span>
-                     <br>
+                     <br/>
                      
                      
                      <label for="submit"></label>
+                
                   </fieldset>
                   <div
-                     class="message">Already have an account?  <a style="color:rgb(255, 208, 0);"  href="login.html">Login</a>
+                     class="message">Already have an account?  <a style="color:rgb(255, 196, 0); "href="login.html">Login</a>
                     
                   </div>
                </form>
-        <button type="button" onclick="fun()" style=" width:26%; position: absolute; top:90%; left:37%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Register</button> 
-           </div>
-          
 
+        <button type="button" onclick="fun()" style=" width:26%; position: absolute; top:90%; left:37%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Register</button> 
+
+           </div>
+           
         </div>
      </body>
 </html>
-
 <script>
     function myFunction() {
     var x = document.getElementById("password");
@@ -228,27 +255,27 @@ label{
 }
 
 function fun(){
-alert("fun()")
 
-var username= document.getElementById('username').value;
-var fname= document.getElementById('firstname').value;
-var lname= document.getElementById('lastname').value;
-var password= document.getElementById('password').value;
-var phoneNumber= document.getElementById('phone').value;
+var username= document.getElementById('username').value;//
+var sel= document.getElementById("selector").value;//
+var categoryid= category.slice(0,1);
+    document.getElementById('wrong_pass_alert').innerHTML
+       = 'woogoooo';
+var name= document.getElementById('name').value;//
 var address= document.getElementById('address').value;
+var password= document.getElementById('password').value;//
+var phoneNumber= document.getElementById('phone').value;
+
+
+
 
     if (document.getElementById('password').value != "" &&
      document.getElementById('copassword').value != "") {
+     
         
-        
-      
 
-//////////////
-
-
-
-let xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:5236/api/Users");
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:5236/api/Restaurant");
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
 
@@ -257,37 +284,33 @@ let xhr = new XMLHttpRequest();
             //"Username already exists! 
             
             if(str.slice(1, 25)  =="Username already exists!"){
-                alert(xhr.response);
+                //alert(xhr.response);
 
             }else if(str.slice(1,32)== "Phone number already registered"){
                 //Phone number already registered to an account. Please use a different one.
-                alert(xhr.response);
+                //alert(xhr.response);
             }else{
-                alert("User created successfully!");
-                window.location.href = "login.html";  
+                //alert("User created successfully!");
+                
             }
             
         }
         let data = `{  
-  "fname": "`+fname+`",
-  "lname": "`+lname+`",
+  "name": "`+name+`",
   "username": "`+username+`",
   "password": "`+password+`",
-  "phoneNumber": `+phoneNumber+`,
-  "address": "`+address+`"
+  "address": "`+address+`",
+  "phonenumber": `+phoneNumber+`,
+  "categoryid": `+categoryid+`
 }`;
         
         xhr.send(data);
       
-       
 
-////////////////
 
-}else {
+
+ } else {
      alert("Please fill all the fields");
  }
-
-
-
 }
  </script>
