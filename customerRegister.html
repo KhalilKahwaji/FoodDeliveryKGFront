@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
     
+
+    <script>
+document.getElementById("checkbox").checked= false;
+    </script>
+
+    
     <style>
         html {
     height: 100%;
@@ -117,7 +123,8 @@ label{
     display: block;
     margin-top: 1px;
     font-size: 16px;
-    font-weight: 50;
+    font-weight: bolder;
+
     text-align: left;
 }
 
@@ -167,7 +174,7 @@ label{
                      <input type="password" name="password" id="password" placeholder="Password" required>
                      <label for="username">Comfirm Password</label>
                      <input type="password" name="copassword" id="copassword" placeholder="Comfirm Password" required onkeyup="validate_password()">
-                     <input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password
+                     <input type="checkbox" style="height: 15px;" id="checkbox" onclick="myFunction()">Show Password
                       <span id="wrong_pass_alert"></span>
                      <br>
                      
@@ -208,13 +215,13 @@ label{
  if (pass != confirm_pass) {
      document.getElementById('wrong_pass_alert').style.color = 'red';
      document.getElementById('wrong_pass_alert').innerHTML
-       = '☒ password not matched';
+       = '✖ password not matched';
      document.getElementById('submit').disabled = true;
      document.getElementById('submit').style.opacity = (0.4);
  } else {
      document.getElementById('wrong_pass_alert').style.color = 'green';
      document.getElementById('wrong_pass_alert').innerHTML =
-         '🗹 Password Matched';
+         '✓ Password Matched';
      document.getElementById('submit').disabled = false;
      document.getElementById('submit').style.opacity = (1);
  }
@@ -245,8 +252,22 @@ let xhr = new XMLHttpRequest();
         xhr.setRequestHeader("Accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        xhr.onload = () => console.log(xhr.responseText);
+        xhr.onload = () =>  {
+            var str= xhr.response;
+            //"Username already exists! 
+            
+            if(str.slice(1, 25)  =="Username already exists!"){
+                alert(xhr.response);
 
+            }else if(str.slice(1,32)== "Phone number already registered"){
+                //Phone number already registered to an account. Please use a different one.
+                alert(xhr.response);
+            }else{
+                alert("User created successfully!");
+                
+            }
+            
+        }
         let data = `{  
   "fname": "`+fname+`",
   "lname": "`+lname+`",
@@ -258,14 +279,10 @@ let xhr = new XMLHttpRequest();
         
         xhr.send(data);
       
-        
-
+       
 
 ////////////////
 
-
-
-     alert("Your response is submitted");
 }else {
      alert("Please fill all the fields");
  }

@@ -20,7 +20,10 @@
     <div>
         <form >
             <h3>Login Here</h3>
-    
+            <select name="res/us" id="usertype">
+                <option value="user">User</option>
+                <option value="restaurant">Restaurant</option>
+            </select>
             <label for="username">Username</label>
             <input type="text" placeholder="Username" id="username">
     
@@ -42,87 +45,182 @@
    
     <script type="text/javascript">
         function submit() {
+            var decider= document.getElementById("usertype").value;
 
             if(document.getElementById('username').value==""){
 
                 alert("please enter username");
 
-            }else if(document.getElementById('password').value==""){
+                }else if(document.getElementById('password').value==""){
 
                 alert("please enter password");
 
-            }else{
+                }else{
+                    if(decider=="user"){
+
+                        user_login();
+
+                        }else{
+
+                        restaurant_login();
+
+                    }
+                }
+
+           
+        }
+
+        function user_login(){
+           
                 var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
+                xhr.onreadystatechange = function () {
                 if (xhr.readyState === 3) {
                     if(xhr.response!= "[]"){
                         alert("logging in...")
-                        login(xhr.response);
+                        ulogin(xhr.response);
                     }else{
                         alert("wrong username or password")
 
                     }
-                
+
                 }
-            }
-            var str="http://localhost:5236/api/Users/";
-            str+= document.getElementById('username').value;
-            str+="/";
-            str+= document.getElementById('password').value;
+                }
+                var str="http://localhost:5236/api/Users/";
+                str+= document.getElementById('username').value;
+                str+="/";
+                str+= document.getElementById('password').value;
 
-            xhr.open('get', str, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-            xhr.send();
-            }
-           
-            
+                xhr.open('get', str, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                xhr.send();
+                
+
+
+                }
+
+
+                function ulogin(info) {
+
+                var myObj= JSON.parse(info);
+                //alert(myObj[0].userid);
+
+
+                /*
+                [
+                {
+                "userid": 2,
+                "fname": "khalil",
+                "lname": "kahwaji",
+                "username": "mkkhell",
+                "dateCreated": "2022-07-16T00:00:00",
+                "password": "123",
+                "phoneNumber": 70707070,
+                "address": "zahle"
+                },*/
+
+
+                var userid= myObj[0].userid;
+                var fname= myObj[0].fname;
+                var lname= myObj[0].lname;
+                var dateCreated= myObj[0].dateCreated;
+                var phoneNumber= myObj[0].phoneNumber;
+                var address= myObj[0].address;
+                var username= myObj[0].username;
+
+
+                sessionStorage.setItem("userid", userid);
+                sessionStorage.setItem("fname", fname);
+                sessionStorage.setItem("lname", lname);
+                sessionStorage.setItem("dateCreated", dateCreated);
+                sessionStorage.setItem("phoneNumber", phoneNumber);
+                sessionStorage.setItem("address", address);
+                sessionStorage.setItem("username", username);
+
+
+
+
+
+                window.location.href = "index.html";  
+
         }
-    
 
-        function login(info) {
 
-            var myObj= JSON.parse(info);
-            //alert(myObj[0].userid);
-            
-            
-            /*
-[
+
+        function restaurant_login(){
+
+            var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                if (xhr.readyState === 3) {
+                    if(xhr.response!= "[]"){
+                        //alert(xhr.response)
+                        rlogin(xhr.response);
+                    }else{
+                        alert("wrong username or password")
+
+                    }
+
+                }
+                }
+                var str="http://localhost:5236/api/Restaurant/";
+                str+= document.getElementById('username').value;
+                str+="/";
+                str+= document.getElementById('password').value;
+
+                xhr.open('get', str, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                xhr.send();
+                
+
+
+
+        }
+
+            function rlogin(info){
+
+
+
+                var myObj= JSON.parse(info);
+                //alert(myObj[0].username);
+
+
+/*
+ [
   {
-    "userid": 2,
-    "fname": "khalil",
-    "lname": "kahwaji",
-    "username": "mkkhell",
-    "dateCreated": "2022-07-16T00:00:00",
+    "restaurantid": 1,
+    "name": "burgerhouse",
+    "username": "zburger",
+    "datecreated": "2022-07-17T00:00:00",
     "password": "123",
-    "phoneNumber": 70707070,
-    "address": "zahle"
-  },*/
-
-
-            var userid= myObj[0].userid;
-            var fname= myObj[0].fname;
-            var lname= myObj[0].lname;
-            var dateCreated= myObj[0].dateCreated;
-            var phoneNumber= myObj[0].phoneNumber;
-            var address= myObj[0].address;
-            var username= myObj[0].username;
-
-           
-            sessionStorage.setItem("userid", userid);
-            sessionStorage.setItem("fname", fname);
-            sessionStorage.setItem("lname", lname);
-            sessionStorage.setItem("dateCreated", dateCreated);
-            sessionStorage.setItem("phoneNumber", phoneNumber);
-            sessionStorage.setItem("address", address);
-            sessionStorage.setItem("username", username);
+    "address": "zahle",
+    "phonenumber": 8080808,
+    "categoryid": 6
+  }
+]*/
 
 
 
-             
 
-            window.location.href = "index.html";  
 
-        }
+                var restaurantid= myObj[0].restaurantid;
+                var restaurantname= myObj[0].name;
+                var restaurantusername= myObj[0].username;
+                var restaurantdateCreated= myObj[0].datecreated;
+                var restaurantphoneNumber= myObj[0].phonenumber;
+                var restaurantaddress= myObj[0].address;
+                var restaurantcategoryid= myObj[0].categoryid;
+
+
+                sessionStorage.setItem("restaurantid", restaurantid);
+                sessionStorage.setItem("restaurantname", restaurantname);
+                sessionStorage.setItem("restaurantusername", restaurantusername);
+                sessionStorage.setItem("restaurantdateCreated", restaurantdateCreated);
+                sessionStorage.setItem("restaurantphoneNumber", restaurantphoneNumber);
+                sessionStorage.setItem("restaurantaddress", restaurantaddress);
+                sessionStorage.setItem("restaurantcategoryid", restaurantcategoryid);
+
+                window.location.href = "restaurantPanel.html";  
+            }
+
     </script>
 </body>
 </html>

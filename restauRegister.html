@@ -79,7 +79,7 @@ input,select{
 }
 
 form{
-    height: 600px;
+    height: 625px;
     width: 400px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
@@ -98,6 +98,17 @@ form *{
     letter-spacing: 0.5px;
     outline: none;
     border: none;
+}
+button{
+margin-top: 50px;
+width: 100%;
+background-color: #ffffff;
+color: #080710;
+padding: 15px 0;
+font-size: 18px;
+font-weight: 600;
+border-radius: 5px; 
+cursor: pointer;
 }
 
 label{
@@ -130,12 +141,13 @@ label{
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 3) {
                var myObj= JSON.parse(xhr.responseText);
-              
+              //var catArr= Array();
                 var sel= document.getElementById("selector");
                 for (let i = 0; i < myObj.length ; i++) {
+                   // catArr.push(myObj[i].categoryname);
                 var option= document.createElement("option");
                 option.value="";
-                option.text= myObj[i].categoryname;
+                option.text= (i+1)+"-"+myObj[i].categoryname;
                 sel.add(option);
                 } 
             }
@@ -156,49 +168,55 @@ label{
             <div class="shape"></div>
         </div>
         <div id="container">
+           <div>
+            <form >
+                <h3>Restaurant-Registration</h3>
+                  <fieldset>
+                     
+                     <label for="username">Username</label>
+                     <input type="text" name="username" id="username" placeholder="Username" required autofocus>
+                    
+                     <label for="name">Restaurant Name</label>
+                     <input type="text" name="name" id="name" placeholder="Restaurant Name" required autofocus>
+                     <label for="">Restaurant Category</label>
+    
+    
+    
+                     <select name="restCateg" id="selector">
+                         <option>test</option>
+                        </select>
+    
+    
+    
+    
+                     <label for="username">Phone</label>
+                     <input type="tel" name="phone" id="phone" placeholder="phone" required>
+                     
+                     <label for="">Address</label>
+                     <input type="text" name="address" id="address" placeholder="Address" required>
+                     
+                     <label for="">Password</label>
+                     <input type="password" name="password" id="password" placeholder="Password" required>
+                     <label for="">Comfirm Password</label>
+                     <input type="password" name="copassword" id="copassword" placeholder="Comfirm Password" required onkeyup="validate_password()">
+                     <input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password
+                      <span id="wrong_pass_alert"></span>
+                     <br/>
+                     
+                     
+                     <label for="submit"></label>
+                
+                  </fieldset>
+                  <div
+                     class="message">Already have an account?  <a style="color:rgb(255, 196, 0); "href="login.html">Login</a>
+                    
+                  </div>
+               </form>
+
+        <button type="button" onclick="fun()" style=" width:26%; position: absolute; top:90%; left:37%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Register</button> 
+
+           </div>
            
-           <form >
-            <h3>Restaurant-Registration</h3>
-              <fieldset>
-                 
-                 <label for="username">Username</label>
-                 <input type="text" name="username" id="username" placeholder="Username" required autofocus>
-                
-                 <label for="name">Restaurant Name</label>
-                 <input type="text" name="name" id="name" placeholder="Restaurant Name" required autofocus>
-                 <label for="">Restaurant Category</label>
-
-
-
-                 <select name="restCateg" id="selector">
-                    </select>
-
-
-
-
-                 <label for="username">Phone</label>
-                 <input type="tel" name="phone" id="phone" placeholder="phone" required>
-                 
-                 <label for="username">Address</label>
-                 <input type="text" name="address" id="address" placeholder="Address" required>
-                 
-                 <label for="username">Password</label>
-                 <input type="password" name="password" id="password" placeholder="Password" required>
-                 <label for="username">Comfirm Password</label>
-                 <input type="password" name="copassword" id="copassword" placeholder="Comfirm Password" required onkeyup="validate_password()">
-                 <input type="checkbox" style="height: 15px;" onclick="myFunction()">Show Password
-                  <span id="wrong_pass_alert"></span>
-                 <br/>
-                 
-                 
-                 <label for="submit"></label>
-                 <input type="submit" name="submit" id="submit" value="REGISTER" onclick="fun()">
-              </fieldset>
-              <div
-                 class="message">Already have an account?<a href="login.html">Login</a>
-                
-              </div>
-           </form>
         </div>
      </body>
 </html>
@@ -223,22 +241,73 @@ label{
  if (pass != confirm_pass) {
      document.getElementById('wrong_pass_alert').style.color = 'red';
      document.getElementById('wrong_pass_alert').innerHTML
-       = '☒ password not matched';
+       = '✖ password not matched';
      document.getElementById('submit').disabled = true;
      document.getElementById('submit').style.opacity = (0.4);
  } else {
      document.getElementById('wrong_pass_alert').style.color = 'green';
      document.getElementById('wrong_pass_alert').innerHTML =
-         '🗹 Password Matched';
+         '✓ Password Matched';
      document.getElementById('submit').disabled = false;
      document.getElementById('submit').style.opacity = (1);
  }
 }
 
 function fun(){
+
+var username= document.getElementById('username').value;//
+var sel= document.getElementById("selector").value;//
+//var categoryid= category[0];
+
+var name= document.getElementById('name').value;//
+alert(">>>>"+ sel);
+var address= document.getElementById('address').value;
+var password= document.getElementById('password').value;//
+var phoneNumber= document.getElementById('phone').value;
+
+
+
+
     if (document.getElementById('password').value != "" &&
      document.getElementById('copassword').value != "") {
-     alert("Your response is submitted");
+     
+        
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:5236/api/Restaurant");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = () =>  {
+            var str= xhr.response;
+            //"Username already exists! 
+            
+            if(str.slice(1, 25)  =="Username already exists!"){
+                alert(xhr.response);
+
+            }else if(str.slice(1,32)== "Phone number already registered"){
+                //Phone number already registered to an account. Please use a different one.
+                alert(xhr.response);
+            }else{
+                alert("User created successfully!");
+                
+            }
+            
+        }
+        let data = `{  
+  "name": "`+name+`",
+  "username": "`+username+`",
+  "password": "`+password+`",
+  "address": "`+address+`",
+  "phonenumber": `+phoneNumber+`,
+  "categoryid": "`+category+`"
+}`;
+        
+        xhr.send(data);
+      
+
+
+
  } else {
      alert("Please fill all the fields");
  }
