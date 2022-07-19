@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Restaurant Panel | Dashboard</title>
+        <title>Restaurant Panel | Food Management</title>
         <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
         <script>
             var name = sessionStorage.getItem("restaurantname");
@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="restaurantPanel.html" class="active">
+                        <a href="restaurantPanel.html" >
                             <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
                             <span class="title">Dashboard</span>
                         </a>
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="foodmanagement.html">
+                        <a href="foodmanagement.html"class="active">
                             <span class="icon"><ion-icon name="pizza-outline"></ion-icon></span>
                             <span class="title">Food Management</span>
                         </a>
@@ -102,34 +102,18 @@
                 </div>
 
                 <!--Cards-->
-                <div class="cardBox">
+                <div class="cardBox" >
                     <div class="card">
                         <div>
                             <div class="numbers">5</div>
-                            <div class="cardName">Customers</div>
+                            <div class="cardName">Total Food</div>
                         </div>
                         <div class="iconBx">
-                            <ion-icon name="accessibility-outline"></ion-icon> 
+                            <ion-icon name="beer-outline"></ion-icon>
                         </div>
                     </div>
-                    <div class="card">
-                        <div>
-                            <div class="numbers">$150</div>
-                            <div class="cardName">Earning</div>
-                        </div>
-                        <div class="iconBx">
-                            <ion-icon name="cash-outline"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div>
-                            <div class="numbers">5</div>
-                            <div class="cardName">Orders</div>
-                        </div>
-                        <div class="iconBx">
-                            <ion-icon name="cart-outline"></ion-icon>
-                        </div>
-                    </div>
+                    
+                    
                     
                 </div>
                 
@@ -137,54 +121,64 @@
                      <!--order details list-->
                     <div class="recentOrders">
                         <div class="cardHeader">
-                            <h2>Recent Orders</h2>
-                            <a href="ordermanagement.html" class="btn">View All </a>
+                            <h2>Food</h2>
+                            <a href="food-add.html" class="btn">Add new </a>
                         </div>
                         <table>
                             <thead>
                                 <tr>
                                     <td>Food Name</td>
-                                    <td>Customer Name</td>
+                                    
                                     <td>Price</td>
-                                    <td>Payment</td>
-                                    <td>Status</td>
+                                    <td>Action</td>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Food 1</td>
-                                    <td>Name</td>
+                                    
                                     <td>$$Se3er</td>
-                                    <td>Paid</td>
-                                    <td><span class="status delivered">Delivered</span></td>
+                                    <td><button>Edit</button>
+                                    <button>Delete</button>
+                                    </td>
+                                   
                                 </tr>
                                 <tr>
                                     <td>Food 2</td>
-                                    <td>Name</td>
+                                    
                                     <td>$$Se3er</td>
-                                    <td>Due</td>
-                                    <td><span class="status pending">Pending</span></td>
+                                    <td><button>Edit</button>
+                                        <button>Delete</button>
+                                        </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>Food 3</td>
-                                    <td>Name</td>
+                                    
                                     <td>$$Se3er</td>
-                                    <td>Due</td>
-                                    <td><span class="status inprogress">In Progress</span></td>
+                                    <td><button>Edit</button>
+                                        <button>Delete</button>
+                                        </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>Food 4</td>
-                                    <td>Name</td>
+                                    
                                     <td>$$Se3er</td>
-                                    <td>Paid</td>
-                                    <td><span class="status return">Return</span></td>
+                                    <td><button>Edit</button>
+                                        <button>Delete</button>
+                                        </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>Food 5</td>
-                                    <td>Name</td>
+                                    
                                     <td>$$Se3er</td>
-                                    <td>Not Paid</td>
-                                    <td><span class="status canceled">Canceled</span></td>
+                                    <td><button>Edit</button>
+                                        <button>Delete</button>
+                                        </td>
+                                    
                                 </tr>
                             </tbody>
                         </table>

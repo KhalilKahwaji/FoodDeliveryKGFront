@@ -3,40 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Restaurant Panel | Dashboard</title>
-        <link rel="stylesheet" type="text/css" href="restPanel.css">
+        <title>Restaurant Panel | Customers</title>
+        <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
+        
+    
     </head>
     <body>
-        <!-- Navigation bar-->
-        <div class="container">
+         <!-- Navigation bar-->
+         <div class="container">
             <div class="navigation">
                 <ul>
                     <li>
                         <a href="#">
                             <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
-                            <span class="title">Restaurant Name</span>
+                            <span class="title" id="resName">Restaurant Name</span>
                         </a>
                     </li>
                     <li>
                         <a href="restaurantPanel.html">
                             <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                            <span class="title" >Dashboard</span>
+                            <span class="title">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="customers.html"  class="active">
                             <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                             <span class="title">Customers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="foodmanagement.html">
                             <span class="icon"><ion-icon name="pizza-outline"></ion-icon></span>
                             <span class="title">Food Management</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="ordermanagement.html">
                             <span class="icon"><ion-icon name="car-sport-outline"></ion-icon></span>
                             <span class="title">order management</span>
                         </a>
@@ -63,30 +65,145 @@
                     </li>-->
                   
                     <li>
-                        <a href="#">
+                        <a href="password-update.html">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
                             <span class="title">Password</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="login.html">
                             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                             <span class="title">Log out</span>
                         </a>
                     </li>
                 </ul>
             </div>
+
+            <!--Main-->
             <div class="main">
                 <div class="topbar">
                     <div class="toggle">
                         <ion-icon name="menu-outline"></ion-icon>
                     </div>
+                    <!-- Search
+                    <div class="search">
+                        <label for="">
+                            <input type="text" placeholder="Search here">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>-->
+                     <!-- UserImg-->
+                     <div class="user">
+                        <img src="logo.png" alt="">
+                     </div>
+                </div>
+
+                <!--Cards-->
+                <div class="cardBox">
+                    <div class="card">
+                        <div>
+                            <div class="numbers">5</div>
+                            <div class="cardName">Total Customers</div>
+                        </div>
+                        <div class="iconBx">
+                            <ion-icon name="accessibility-outline"></ion-icon> 
+                        </div>
+                    </div>
+
+                    
+                </div>
+                
+                <div class="details">
+                     <!--Customer details list-->
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Customers</h2>
+                            
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>Last Name</td>
+                                    <td>Phone Number</td>
+                                    <td>Address</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>firstName 1</td>
+                                    <td>lastName 1</td>
+                                    <td>number 1</td>
+                                    <td>address 1</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>firstName 2</td>
+                                    <td>lastName 2</td>
+                                    <td>number 2</td>
+                                    <td>address 2</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>firstName 3</td>
+                                    <td>lastName 3</td>
+                                    <td>number 3</td>
+                                    <td>address 3</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>firstName 4</td>
+                                    <td>lastName 4</td>
+                                    <td>number 4</td>
+                                    <td>address 4</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>firstName 5</td>
+                                    <td>lastName 5</td>
+                                    <td>number 5</td>
+                                    <td>address 5</td>
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                     <!--New Customers-->
+                    <div class="recentCustomers">
+                        <div class="cardHeader">
+                            <h2>Recent Customers</h2> 
+                        </div>
+                        <table>
+                            <tr>
+                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
+                                <td><h4>Customer1<br><span>Address1</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
+                                <td><h4>Customer2<br><span>Address2</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><!--<div class="imgBx"><img src=""></div>-->  </td>
+                                <td><h4>Customer3<br><span>Address3</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
+                                <td><h4>Customer4<br><span>Address4</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
+                                <td><h4>Customer5<br><span>Address5</span></h4></td>
+                            </tr>
+                        </table>
+                    </div>
 
 
-
-
-
-
+                </div>
+            
+            </div>
+        </div>
+         <!-- Navigation bar ends-->
 
 
 

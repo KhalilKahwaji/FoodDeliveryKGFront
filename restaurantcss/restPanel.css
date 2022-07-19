@@ -48,8 +48,7 @@ body{
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
 }
-.navigation ul li:hover,
-.navigation ul li.hovered
+.navigation ul li:hover
 {
     background: var(--white);
 }
@@ -65,8 +64,7 @@ body{
     text-decoration: none;
     color: var(--black2);
 }
-.navigation ul li:hover a,
-.navigation ul li.hovered a
+.navigation ul li:hover a
 {
     color: var(--blue);
 }
@@ -91,8 +89,11 @@ body{
     white-space: nowrap;
 }
 
-.navigation ul li:hover a::before,
-.navigation ul li.hovered a::before
+.navigation ul li a.active{
+    background: var(--white);
+}
+
+.navigation ul li:hover a::before
 {
     content: '';
     position: absolute;
@@ -105,8 +106,7 @@ body{
     box-shadow: 35px 35px 0 10px var(--white);
     pointer-events: none;
 }
-.navigation ul li:hover a::after,
-.navigation ul li.hovered a::after
+.navigation ul li:hover a::after
 {
     content: '';
     position: absolute;
@@ -300,7 +300,7 @@ body{
     text-align: end;
 }
 .details .recentOrders table tr td:nth-child(1){
-    text-align:center;
+    text-align:left;
 }
 .details .recentOrders table tr td:nth-child(2){
     text-align:center;
