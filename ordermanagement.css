@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Noto sans;
+  user-select:none;
+}
+
+ul li{
+    list-style: '\1F95E';
+   
+}
+.Modal {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  height: 470px;
+  width: 500px;
+  border-radius: 20px;
+  background: rgb(196, 196, 196);
+}
+.Modal-InText {
+  text-align: left;
+  transform: translate(50px, 60px);
+  font-family: Inria Sans;
+}
+.Modal-InBtn {
+  padding: 10px 50px;
+  transform: translate(300px, 100px);
+  border-radius: 20px;
+  font-family: Inria sans;
+  font-size: 20px;
+  font-weight: bolder;
+  outline: none;
+  border: 2px solid rgb(0, 0, 0);
+  transition:0.2s ease-in-out all;
+  cursor:pointer;
+}
+.Btn-Right:hover{
+  background:#fff;
+  border: 1px solid rgba(14, 255, 110, 0.85);
+}
+.Btn-Left:hover{
+    background:rgb(65, 65, 252);
+    border: 2px solid blue;
+  }
+  
+
+.Btn-Right{
+    background: rgba(14, 255, 110, 0.85);
+}
+.Btn-Left{
+    transform: translate(180px, 80px);
+    background: blue;
+}

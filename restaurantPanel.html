@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Restaurant Panel | Dashboard</title>
         <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
+        <link rel="stylesheet" type="text/css" href="ordermanagement.css">
         <script src="JS/logout.js"></script> 
         <script>
             const resUsername= sessionStorage.getItem("restaurantusername");
@@ -34,7 +35,9 @@
     <body>
         <!-- Navigation bar-->
         <div class="container">
+
             <div class="navigation">
+
                 <ul>
                     <li>
                         <a href="#">
@@ -91,6 +94,8 @@
 
             <!--Main-->
             <div class="main">
+
+              
                 <div class="topbar">
                     <div class="toggle">
                         <ion-icon name="menu-outline"></ion-icon>
@@ -210,6 +215,7 @@
                             
                         </table>
 
+                      
 
                         <script>
                                  const table= document.getElementById("recentcustomers");
@@ -228,7 +234,7 @@
                                             for (let i = 0; i < myObj.length ; i++) {
                                                 var elm = table.insertRow();
                                                 var col=elm.insertCell();
-                                                col.innerHTML="<h4>"+myObj[i].fname+" " +myObj[i].lname+"<br><span>"+myObj[i].address+"</span></h4>";
+                                                col.innerHTML="<h4 onclick=\"showUser("+myObj[i].userid+")\">"+myObj[i].fname+" " +myObj[i].lname+"<br><span>"+myObj[i].address+"</span></h4>";
                                             } 
                                         }
                                     }
@@ -249,6 +255,54 @@
 
 
                 </div>
+                <div class="Modal" id="showuser" style="display:none;">
+                    <h2 class="Modal-InText" id="userinfo">
+                      
+                    </h2>
+                    <!-- <button class="Modal-InBtn Btn-Right">Yup </button> -->
+                     <button class="Modal-InBtn Btn-Left" onclick="disappear()">Done</button>
+                  </div>
+
+                  <script>
+                      function disappear(){
+
+                            document.getElementById("showuser").style.display="none";
+
+                      }
+
+                      function showUser(id){
+
+                        document.getElementById("showuser").style.display="block";
+                        const userinfo= document.getElementById("userinfo");
+                        
+                        var str="";
+                            
+                        var xhr3 = new XMLHttpRequest();
+                                    xhr3.onreadystatechange = function () {
+                                        if (xhr3.readyState === 3) {
+                                           
+                                        var myObj= JSON.parse(xhr3.responseText);
+                                        
+                                            for (let i = 0; i <4 ; i++) {
+                                                switch(i){
+                                                    case 0: str+="<ul><li><p style=\"color:blue;\">First Name: </p>"+myObj.fname;break;
+                                                    case 1: str+="<li><p style=\"color:blue;\">Last Name: </p>"+myObj.lname;break;
+                                                    case 2: str+="<li><p style=\"color:blue;\">Phone Number: </p>"+myObj.phoneNumber;break;
+                                                    case 3: str+="<li><p style=\"color:blue;\">Address: </p>"+myObj.address+"</ul>";break;
+
+                                                }
+                                                
+                                            } 
+                                            userinfo.innerHTML=str;
+                                        }
+                                    }
+                                    var urlstr= "http://localhost:5236/api/Users/"+id;
+                                    //alert(urlstr);
+                                    xhr3.open('get', urlstr, true);
+                                    xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                                    xhr3.send();
+                      }
+                      </script>
             
             </div>
         </div>
