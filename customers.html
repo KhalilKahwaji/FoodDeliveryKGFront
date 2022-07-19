@@ -16,7 +16,13 @@
                     <li>
                         <a href="#">
                             <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
-                            <span class="title" id="resName">Restaurant Name</span>
+                            <span class="title" id=resname>Restaurant Name</span>
+                            <script>
+                           
+                                var name = sessionStorage.getItem("restaurantname");
+                               document.getElementById('resname').textContent= name.toUpperCase();
+                                
+                            </script>
                         </a>
                     </li>
                     <li>
@@ -64,14 +70,14 @@
                         </a>
                     </li>-->
                   
-                    <li>
+                    <!-- <li>
                         <a href="password-update.html">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
                             <span class="title">Password</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
-                        <a href="login.html">
+                        <a onclick="logoutFunction()">
                             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                             <span class="title" onclick="logoutFunction()">Log out</span>
                         </a>
@@ -102,7 +108,10 @@
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="numbers">5</div>
+                            <div class="numbers" id="totalcustomers">0</div>
+                            <script>
+                                document.getElementById("totalcustomers").innerHTML= sessionStorage.getItem("numberofcustomers");
+                            </script>
                             <div class="cardName">Total Customers</div>
                         </div>
                         <div class="iconBx">
@@ -120,7 +129,7 @@
                             <h2>Customers</h2>
                             
                         </div>
-                        <table>
+                        <table >
                             <thead>
                                 <tr>
                                     <td>First Name</td>
@@ -129,44 +138,56 @@
                                     <td>Address</td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>firstName 1</td>
-                                    <td>lastName 1</td>
-                                    <td>number 1</td>
-                                    <td>address 1</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>firstName 2</td>
-                                    <td>lastName 2</td>
-                                    <td>number 2</td>
-                                    <td>address 2</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>firstName 3</td>
-                                    <td>lastName 3</td>
-                                    <td>number 3</td>
-                                    <td>address 3</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>firstName 4</td>
-                                    <td>lastName 4</td>
-                                    <td>number 4</td>
-                                    <td>address 4</td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>firstName 5</td>
-                                    <td>lastName 5</td>
-                                    <td>number 5</td>
-                                    <td>address 5</td>
-                                    
-                                </tr>
+                            <tbody id="customers">
+                                
                             </tbody>
                         </table>
+
+
+                        <script>
+                            const table= document.getElementById("customers");
+                           //const numberCust= document.getElementById("numcust");
+                           
+
+
+                       var xhr = new XMLHttpRequest();
+                               xhr.onreadystatechange = function () {
+                                   if (xhr.readyState === 3) {
+                                   var myObj= JSON.parse(xhr.responseText);
+                                
+                                       
+                                       
+                                       for (let i = 0; i < myObj.length ; i++) {
+                                           var elm = table.insertRow();
+                                           
+                                           for(let j=0; j<4; j++)
+                                           {
+                                            var col=elm.insertCell();
+                                               switch(j){
+                                                   case 0:col.innerHTML="<td>"+myObj[i].fname+"</td>"; break;
+                                                   case 1:col.innerHTML="<td>"+myObj[i].lname+"</td>"; break;
+                                                   case 2:col.innerHTML="<td>"+myObj[i].phoneNumber+"</td>"; break;
+                                                   case 3:col.innerHTML="<td>"+myObj[i].address+"</td>"; break;
+                                               }
+                                              
+                                              
+                                           }
+                                       } 
+                                   }
+                               }
+                               var urlstr= "http://localhost:5236/api/Restaurant/logindata/"+sessionStorage.getItem("restaurantusername");
+                               //alert(urlstr);
+                               xhr.open('get', urlstr, true);
+                               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                               xhr.send();
+ 
+
+
+
+
+                      
+                           
+                   </script>
                     </div>
 
 

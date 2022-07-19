@@ -151,22 +151,85 @@ label{
         <form >
             <h3>Add New Food</h3>
             <label for="foodname">Food Name</label>
-            <input type="text" placeholder="Food Name" id="foodname">
+            <input type="text" placeholder="Food Name" id="name">
     
-            <label for="price">Price</label>
-            <input type="text" placeholder="Price" id="price">
+            <label for="price">Price (usd)</label>
+            <input type="number" min="0" max="2,147,483,646" placeholder="Price" id="price">
             <label for="image">Image</label>
-            <input type="file"name="image" id="image" >
+            <input type="test"name="image" id="image" placeholder="Image URL">
             <label for="">Food Category</label>
-            <select>
-                <option>cat1</option>
+            <select id="selector">
+      
             </select>
             <div>
                 <p class="message">Do u want to go back? <a href="foodmanagement.html" style="color: yellow;">Go back</a></p>
               </div>
         </form>
         
-        <button type="button" onclick="" style="position: absolute; top:95%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Add Product</button> 
+        <button type="button" onclick="addProduct()" style="position: absolute; top:95%; background-color:rgb(50, 52, 61); color:rgb(255, 255, 255);">Add Product</button> 
     </div>
+
+    <script>
+  
+ 
+
+        var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 3) {
+                     var myObj= JSON.parse(xhr.responseText);
+                     const sel= document.getElementById("selector");
+                      
+                      for (let i = 0; i < myObj.length ; i++) {
+                        var txt= (i+1)+"-"+myObj[i].categoryname;
+                          //alert(txt);
+                          const option = new Option(txt ,txt);
+                          sel.add(option, undefined);
+                      } 
+                  }
+              }
+              xhr.open('get', 'http://localhost:5236/api/FoodCategory', true);
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+              xhr.send();
+            
+
+
+
+
+
+
+              function addProduct(){
+                  const name = document.getElementById("name").value;
+                  const price = document.getElementById("price").value;
+                  const image = document.getElementById("image").value;
+                  var category= document.getElementById("selector").value;
+                  const categoryid= category.slice(0,1);
+
+
+                  let xhr2 = new XMLHttpRequest();
+                        xhr2.open("POST", "http://localhost:5236/api/Items");
+                        xhr2.setRequestHeader("Accept", "application/json");
+                        xhr2.setRequestHeader("Content-Type", "application/json");
+
+                        xhr2.onload = () =>  {
+                            var str= xhr2.response;
+                            
+                        
+                            
+                        }
+                        let data = `{  
+                "name": "`+name+`",
+                "price": `+price+`,
+                "image": "`+image+`",
+                "restaurantid": `+sessionStorage.getItem("restaurantid")+`,
+                "categoryid": `+categoryid+`
+
+
+                }`;
+                        
+                        xhr2.send(data);
+
+              }
+            
+      </script>
 </body>
 </html>

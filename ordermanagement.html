@@ -5,11 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Restaurant Panel | Order Management</title>
         <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
-        <script>
+        <script src="JS/logout.js"></script> 
+
+
+        <!-- <script>
             var name = sessionStorage.getItem("restaurantname");
             javascript:void(alert(document.getElementById(resName).text));
             span.textContent = 'Replacement span text';
-        </script>
+        </script> -->
     </head>
     <body>
         <!-- Navigation bar-->
@@ -19,7 +22,13 @@
                     <li>
                         <a href="#">
                             <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
-                            <span class="title" id="resName">Restaurant Name</span>
+                            <span class="title" id=resname>Restaurant Name</span>
+                            <script>
+                           
+                                var name = sessionStorage.getItem("restaurantname");
+                               document.getElementById('resname').textContent= name.toUpperCase();
+                                
+                            </script>
                         </a>
                     </li>
                     <li>
@@ -66,15 +75,15 @@
                             <span class="title">Settings</span>
                         </a>
                     </li>-->
-                  
+<!--                   
                     <li>
                         <a href="password-update.html">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
                             <span class="title">Password</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
-                        <a href="login.html">
+                        <a onclick="logoutFunction()">
                             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                             <span class="title"onclick="logoutFunction()">Log out</span>
                         </a>

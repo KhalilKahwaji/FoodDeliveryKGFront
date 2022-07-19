@@ -5,10 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Restaurant Panel | Dashboard</title>
         <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
+        <script src="JS/logout.js"></script> 
         <script>
-            var name = sessionStorage.getItem("restaurantname");
-            javascript:void(alert(document.getElementById(resName).text));
-            span.textContent = 'Replacement span text';
+            const resUsername= sessionStorage.getItem("restaurantusername");
+
+
+            var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 3) {
+               var myObj= JSON.parse(xhr.responseText);
+               const sel= document.getElementById("selector");
+                
+                for (let i = 0; i < myObj.length ; i++) {
+                  var txt= (i+1)+"-"+myObj[i].categoryname;
+                    //alert(txt);
+                    const option = new Option(txt ,txt);
+                    sel.add(option, undefined);
+                } 
+            }
+        }
+        xhr.open('get', 'http://localhost:5236/api/RestaurantCategory', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.send();
+      
+      
         </script>
     </head>
     <body>
@@ -19,8 +39,14 @@
                     <li>
                         <a href="#">
                             <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
-                            <span class="title" id="resName">Restaurant Name</span>
+                            <span class="title" id=resname>Restaurant Name</span>
                         </a>
+                        <script>
+                           
+                            var name = sessionStorage.getItem("restaurantname");
+                           document.getElementById('resname').textContent= name.toUpperCase();
+                            
+                        </script>
                     </li>
                     <li>
                         <a href="restaurantPanel.html" class="active">
@@ -46,35 +72,16 @@
                             <span class="title">order management</span>
                         </a>
                     </li>
-                    <!--
-                    <li>
-                        <a href="#">
-                            <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-                            <span class="title">Message</span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
-                            <span class="title">Help</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                            <span class="title">Settings</span>
-                        </a>
-                    </li>-->
+
                   
-                    <li>
+                    <!-- <li>
                         <a href="password-update.html">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
                             <span class="title">Password</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
-                        <a href="login.html">
+                        <a onclick="logoutFunction()">
                             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                             <span class="title">Log out</span>
                         </a>
@@ -97,7 +104,7 @@
                     </div>-->
                      <!-- UserImg-->
                      <div class="user">
-                        <img src="logo.png" alt="">
+                        <img src="logo.png" alt="website logo">
                      </div>
                 </div>
 
@@ -105,14 +112,14 @@
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="numbers">5</div>
+                            <div class="numbers" id="numcust">0</div>
                             <div class="cardName">Customers</div>
                         </div>
                         <div class="iconBx">
                             <ion-icon name="accessibility-outline"></ion-icon> 
                         </div>
                     </div>
-                    <div class="card">
+                    <!-- <div class="card">
                         <div>
                             <div class="numbers">$150</div>
                             <div class="cardName">Earning</div>
@@ -120,10 +127,10 @@
                         <div class="iconBx">
                             <ion-icon name="cash-outline"></ion-icon>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="card">
                         <div>
-                            <div class="numbers">5</div>
+                            <div class="numbers" >5</div>
                             <div class="cardName">Orders</div>
                         </div>
                         <div class="iconBx">
@@ -195,28 +202,49 @@
                         <div class="cardHeader">
                             <h2>Recent Customers</h2> 
                         </div>
-                        <table>
+                        <table id="recentcustomers">
                             <tr>
-                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
-                                <td><h4>Customer1<br><span>Address1</span></h4></td>
+                               <!-- <td width="60px"><div class="imgBx"><img src=""></div> </td>-->
+                               <!--  <td><h4>Customer1<br><span>Address1</span></h4></td>-->
                             </tr>
-                            <tr>
-                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
-                                <td><h4>Customer2<br><span>Address2</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><!--<div class="imgBx"><img src=""></div>-->  </td>
-                                <td><h4>Customer3<br><span>Address3</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
-                                <td><h4>Customer4<br><span>Address4</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><!--<div class="imgBx"><img src=""></div>--> </td>
-                                <td><h4>Customer5<br><span>Address5</span></h4></td>
-                            </tr>
+                            
                         </table>
+
+
+                        <script>
+                                 const table= document.getElementById("recentcustomers");
+                                const numberCust= document.getElementById("numcust");
+                                
+
+
+                            var xhr = new XMLHttpRequest();
+                                    xhr.onreadystatechange = function () {
+                                        if (xhr.readyState === 3) {
+                                        var myObj= JSON.parse(xhr.responseText);
+                                            
+                                            numberCust.innerHTML= myObj.length;
+                                            
+                                            sessionStorage.setItem("numberofcustomers", myObj.length);
+                                            for (let i = 0; i < myObj.length ; i++) {
+                                                var elm = table.insertRow();
+                                                var col=elm.insertCell();
+                                                col.innerHTML="<h4>"+myObj[i].fname+" " +myObj[i].lname+"<br><span>"+myObj[i].address+"</span></h4>";
+                                            } 
+                                        }
+                                    }
+                                    var urlstr= "http://localhost:5236/api/Restaurant/logindata/"+sessionStorage.getItem("restaurantusername");
+                                    //alert(urlstr);
+                                    xhr.open('get', urlstr, true);
+                                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                                    xhr.send();
+      
+
+
+
+
+                           
+                                
+                        </script>
                     </div>
 
 

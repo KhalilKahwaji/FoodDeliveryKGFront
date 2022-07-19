@@ -10,7 +10,7 @@
             var name = sessionStorage.getItem("restaurantname");
             javascript:void(alert(document.getElementById(resName).text));
             span.textContent = 'Replacement span text';
-        </script>
+        </script> 
     </head>
     <body>
         <!-- Navigation bar-->
@@ -20,7 +20,13 @@
                     <li>
                         <a href="#">
                             <span class="icon"><ion-icon name="fast-food-outline"></ion-icon></span>
-                            <span class="title" id="resName">Restaurant Name</span>
+                            <span class="title" id=resname>Restaurant Name</span>
+                            <script>
+                           
+                                var name = sessionStorage.getItem("restaurantname");
+                               document.getElementById('resname').textContent= name.toUpperCase();
+                                
+                            </script>
                         </a>
                     </li>
                     <li>
@@ -67,15 +73,15 @@
                             <span class="title">Settings</span>
                         </a>
                     </li>-->
-                  
+<!--                   
                     <li>
                         <a href="password-update.html">
                             <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
                             <span class="title">Password</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li>
-                        <a href="login.html">
+                        <a onclick="logoutFunction()">
                             <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                             <span class="title" onclick="logoutFunction()">Log out</span>
                         </a>
@@ -106,7 +112,7 @@
                 <div class="cardBox" >
                     <div class="card">
                         <div>
-                            <div class="numbers">5</div>
+                            <div class="numbers" id="totalitems">0</div>
                             <div class="cardName">Total Food</div>
                         </div>
                         <div class="iconBx">
@@ -135,54 +141,79 @@
                                     
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="items">
                                 <tr>
-                                    <td>Food 1</td>
-                                    
-                                    <td>$$Se3er</td>
-                                    <td><button>Edit</button>
-                                    <button>Delete</button>
-                                    </td>
-                                   
-                                </tr>
-                                <tr>
-                                    <td>Food 2</td>
-                                    
-                                    <td>$$Se3er</td>
-                                    <td><button>Edit</button>
-                                        <button>Delete</button>
-                                        </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>Food 3</td>
-                                    
-                                    <td>$$Se3er</td>
-                                    <td><button>Edit</button>
-                                        <button>Delete</button>
-                                        </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>Food 4</td>
-                                    
-                                    <td>$$Se3er</td>
-                                    <td><button>Edit</button>
-                                        <button>Delete</button>
-                                        </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>Food 5</td>
-                                    
-                                    <td>$$Se3er</td>
-                                    <td><button>Edit</button>
-                                        <button>Delete</button>
-                                        </td>
-                                    
-                                </tr>
+                                
                             </tbody>
                         </table>
+
+                        <script>
+                            const table= document.getElementById("items");
+                            var totalItems= document.getElementById("totalitems");
+                           
+
+
+                       var xhr = new XMLHttpRequest();
+
+                               xhr.onreadystatechange = function () {
+                                   if (xhr.readyState === 3) {
+                                   var myObj= JSON.parse(xhr.responseText);
+
+                                        
+
+                                       sessionStorage.setItem("totalitems", myObj.length);
+                                       totalItems.innerHTML= myObj.length;
+                                       
+                                       for (let i = 0; i < myObj.length ; i++) {
+                                           var elm = table.insertRow();
+                                           
+                                           for(let j=0; j<3; j++)
+                                           {
+                                            var col=elm.insertCell();
+                                               switch(j){
+                                                   case 0:col.innerHTML="<td>"+myObj[i].name+"</td>"; break;
+                                                   case 1:col.innerHTML="<td>"+myObj[i].price+"$</td>"; break;
+                                                   case 2:col.innerHTML="<td><button onclick= \"delItem("+myObj[i].itemid+")\">Delete</button></td>"; break;
+                                                   
+                                               }
+                                              
+                                              
+                                           }
+                                       } 
+                                   }
+                               }
+                               var urlstr= "http://localhost:5236/api/Restaurant/RestaurantItems/"+sessionStorage.getItem("restaurantid");
+                               //alert(urlstr);
+                               xhr.open('get', urlstr, true);
+                               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                               xhr.send();
+ 
+
+
+                                function delItem(id){
+                                 
+                                   var xhr2 = new XMLHttpRequest();
+
+                                    xhr2.onreadystatechange = function () {
+                                        if (xhr2.readyState === 3) {
+                                        
+                                                //window.location.href("foodmanagement.html");
+                                                
+                                                    
+                                                }
+                                            }
+                                            var urlstr2= "http:localhost:5236/api/Restaurant/DeleteItem/"+id;
+                                            alert(urlstr2);
+                                            xhr.open('get', urlstr2, true);
+                                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                                            xhr.send();
+
+
+                                }
+                                    
+                                                        
+                           
+                   </script>
                     </div>
 
                      
