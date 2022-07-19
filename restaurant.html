@@ -12,32 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="style.css">
 
-<script>
-  
-    var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function () {
-              if (xhr.readyState === 3) {
-                 var myObj= JSON.parse(xhr.responseText);
-                
-                  var sel= document.getElementById("insert");
-                  for (let i = 0; i < myObj.length ; i++) {
-                  var option= document.createElement("option");
-                  option.value="";
-                  option.text= myObj[i].name;
-                  sel.add(option);
-                  } 
-              }
-          }
-          xhr.open('get', 'http://localhost:5236/api/Restaurant', true);
-          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-          xhr.send();
-        
-        
-  </script>
-    
-    
+    <link rel="stylesheet" href="style.css">
+    <script src="JS/logout.js"></script>
+            
 </head>
 <body>
 <header>
@@ -47,6 +25,7 @@
         <a  href="index.html">Home</a>
         <a href="about.html">About</a>
         <a class="active" href="restaurant.html">Restaurants</a>
+        <a onclick="logoutFunction()">Log out</a> <!--temporarily-->
         
     </nav>
 
@@ -57,27 +36,9 @@
     </div>
 
 </header>
-<div class="filter-grid">
-    <div class="inner-wrap">
-      <div class="filter-cell">
 
 
-        <select class="form-control" id="selector">
-          <option value="*">Restaurant Category</option>
-          
-        </select>
-      </div>
-      <div class="filter-cell">
-        <select class="form-control">
-          <option  value="*">Price</option>
-      
-        </select>
-      </div>
-     
-    </div>
-  </div>
-
-    
+  
     
     <footer id="main-footer">
         <p>KG Food Order  &copy; 2022, All Rights Reserved - Khalil Kahwaji & Georges AL Hajj </p>
