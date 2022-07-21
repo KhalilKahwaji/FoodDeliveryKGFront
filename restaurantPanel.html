@@ -7,7 +7,14 @@
         <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
         <link rel="stylesheet" type="text/css" href="ordermanagement.css">
         <script src="JS/logout.js"></script> 
+
+        <script src="JS/manageSession.js">
+            
+        </script> 
+
         <script>
+            getItemsFromId(sessionStorage.getItem("restaurantid"));
+            // alert(sessionStorage.getItem("allitems"));
             const resUsername= sessionStorage.getItem("restaurantusername");
             var status="[{\"statusid\": 1,\"statusname\": \"pending\"},{\"statusid\": 2,\"statusname\": \"delivered\"},{\"statusid\": 3,\"statusname\": \"canceled\"}]"
             sessionStorage.setItem("status", status);
@@ -238,7 +245,7 @@
                                         var myObj= JSON.parse(xhr4.responseText);
                                         document.getElementById("numoforders").innerHTML= myObj.length;
                                        
-
+                                        sessionStorage.setItem("orderstorestaurant", xhr4.responseText);
                                         // JUST SHOWING A MAX OF 5 ORDERS
                                         for(let i=0; i<(Math.min(myObj.length), 5); i++){
                                             var roww= ordzTable.insertRow();
@@ -246,7 +253,7 @@
                                             for(let j=0; j<6; j++){
                                                 var coll= roww.insertCell();
                                                 switch(j){
-                                                    case 0:coll.innerHTML="<td>"+myObj[i].itemid+"</td>"; break;
+                                                    case 0:coll.innerHTML="<td>"+getItemName(myObj[i].itemid)+"</td>"; break;
                                                     case 1:coll.innerHTML="<td>"+getCustomerName(myObj[i].userid)+"</td>"; break;
                                                     case 2:coll.innerHTML="<td>$"+myObj[i].price+"</td>"; break;
                                                     case 3:coll.innerHTML="<td>"+myObj[i].quantity+"</td>"; break;
@@ -290,6 +297,18 @@
                                             case 3: return myObj[2].statusname;
                                             default: return "not set";
                                         }
+                                    }
+
+                                    function getItemName(id){
+                                        var items= sessionStorage.getItem("allitems");
+                                        //alert(items);
+                                        var myObj1= JSON.parse(items);
+                                        for(let i=0; i<myObj1.length; i++){
+                                            if(myObj1[i].itemid== id){
+                                                return myObj1[i].name;
+                                            }
+                                        }
+                                        return "not set";
                                     }
 
                         </script>
