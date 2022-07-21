@@ -7,9 +7,17 @@
         <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
         <link rel="stylesheet" type="text/css" href="ordermanagement.css">
         <script src="JS/logout.js"></script> 
-        <script>
-            const resUsername= sessionStorage.getItem("restaurantusername");
 
+        <script src="JS/manageSession.js">
+            
+        </script> 
+
+        <script>
+            getItemsFromId(sessionStorage.getItem("restaurantid"));
+            // alert(sessionStorage.getItem("allitems"));
+            const resUsername= sessionStorage.getItem("restaurantusername");
+            var status="[{\"statusid\": 1,\"statusname\": \"pending\"},{\"statusid\": 2,\"statusname\": \"delivered\"},{\"statusid\": 3,\"statusname\": \"canceled\"}]"
+            sessionStorage.setItem("status", status);
 
             var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -135,7 +143,7 @@
                     </div> -->
                     <div class="card">
                         <div>
-                            <div class="numbers" >5</div>
+                            <div class="numbers" id="numoforders">0</div>
                             <div class="cardName">Orders</div>
                         </div>
                         <div class="iconBx">
@@ -158,48 +166,20 @@
                                     <td>Food Name</td>
                                     <td>Customer Name</td>
                                     <td>Price</td>
-                                    <td>Payment</td>
+                                    <td>Qtty</td>
+                                    <td>Date</td>
                                     <td>Status</td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Food 1</td>
-                                    <td>Name</td>
-                                    <td>$$Se3er</td>
-                                    <td>Paid</td>
-                                    <td><span class="status delivered">Delivered</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Food 2</td>
-                                    <td>Name</td>
-                                    <td>$$Se3er</td>
-                                    <td>Due</td>
-                                    <td><span class="status pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Food 3</td>
-                                    <td>Name</td>
-                                    <td>$$Se3er</td>
-                                    <td>Due</td>
-                                    <td><span class="status inprogress">In Progress</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Food 4</td>
-                                    <td>Name</td>
-                                    <td>$$Se3er</td>
-                                    <td>Paid</td>
-                                    <td><span class="status return">Return</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Food 5</td>
-                                    <td>Name</td>
-                                    <td>$$Se3er</td>
-                                    <td>Not Paid</td>
-                                    <td><span class="status canceled">Canceled</span></td>
-                                </tr>
+                            <tbody id="ordersByCust">
+
                             </tbody>
                         </table>
+
+
+                       
+
+
                     </div>
 
                      <!--New Customers-->
@@ -227,7 +207,7 @@
                                     xhr.onreadystatechange = function () {
                                         if (xhr.readyState === 3) {
                                         var myObj= JSON.parse(xhr.responseText);
-                                            
+                                            sessionStorage.setItem("restaurantCustomers", xhr.responseText);
                                             numberCust.innerHTML= myObj.length;
                                             
                                             sessionStorage.setItem("numberofcustomers", myObj.length);
@@ -250,6 +230,87 @@
 
                            
                                 
+                        </script>
+
+
+                        <script>
+                            //http://localhost:5236/api/Orders/OrdersToRestaurant/2
+
+                            const ordzTable = document.getElementById("ordersByCust");
+
+
+                            var xhr4 = new XMLHttpRequest();
+                                    xhr4.onreadystatechange = function () {
+                                        if (xhr4.readyState === 3) {
+                                        var myObj= JSON.parse(xhr4.responseText);
+                                        document.getElementById("numoforders").innerHTML= myObj.length;
+                                       
+                                        sessionStorage.setItem("orderstorestaurant", xhr4.responseText);
+                                        // JUST SHOWING A MAX OF 5 ORDERS
+                                        for(let i=0; i<(Math.min(myObj.length), 5); i++){
+                                            var roww= ordzTable.insertRow();
+
+                                            for(let j=0; j<6; j++){
+                                                var coll= roww.insertCell();
+                                                switch(j){
+                                                    case 0:coll.innerHTML="<td>"+getItemName(myObj[i].itemid)+"</td>"; break;
+                                                    case 1:coll.innerHTML="<td>"+getCustomerName(myObj[i].userid)+"</td>"; break;
+                                                    case 2:coll.innerHTML="<td>$"+myObj[i].price+"</td>"; break;
+                                                    case 3:coll.innerHTML="<td>"+myObj[i].quantity+"</td>"; break;
+                                                    case 4:coll.innerHTML="<td>"+myObj[i].dateoforder.slice(0,10)+"</td>"; break;
+                                                    case 5:coll.innerHTML="<td><span class= \"status "+getStatusName(myObj[i].statusid)+"\">"+getStatusName(myObj[i].statusid)+"</span></td>"; break;
+
+                                                }
+                                            }
+                                        }
+                                        }
+                                    }
+                                    var urlstr= "http://localhost:5236/api/Orders/OrdersToRestaurant/"+sessionStorage.getItem("restaurantid");
+                                    //alert(urlstr);
+                                    xhr4.open('get', urlstr, true);
+                                    xhr4.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                                    xhr4.send();
+
+
+
+                                    function getCustomerName(id){
+                                        //alert("get cust name on user id: "+id );
+                                        var customers= sessionStorage.getItem("restaurantCustomers");
+                                        var myObj= JSON.parse(customers);
+
+                                        for(let i=0; i<myObj.length; i++){
+                                            //alert(myObj[i].userid)
+                                            if(myObj[i].userid== id){
+                                                return myObj[i].fname;
+                                            }
+                                        }
+                                        return "not set";
+                                    }
+
+                                    function getStatusName(id){
+                                        var status1= sessionStorage.getItem("status");
+                                       
+                                        var myObj= JSON.parse(status1);
+                                        switch(id){
+                                            case 1: return myObj[0].statusname;
+                                            case 2: return myObj[1].statusname;
+                                            case 3: return myObj[2].statusname;
+                                            default: return "not set";
+                                        }
+                                    }
+
+                                    function getItemName(id){
+                                        var items= sessionStorage.getItem("allitems");
+                                        //alert(items);
+                                        var myObj1= JSON.parse(items);
+                                        for(let i=0; i<myObj1.length; i++){
+                                            if(myObj1[i].itemid== id){
+                                                return myObj1[i].name;
+                                            }
+                                        }
+                                        return "not set";
+                                    }
+
                         </script>
                     </div>
 
