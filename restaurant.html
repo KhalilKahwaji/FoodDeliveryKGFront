@@ -15,6 +15,19 @@
     <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
     <link rel="stylesheet" href="style.css">
     <script src="JS/logout.js"></script>
+    <style>
+        td, tr {
+            color: black;
+        }
+    .recentCustomers table  tr:hover{
+            background:darkgrey;
+            color:white;
+    }
+    .recentCustomers{
+        width: 150px;
+    }
+
+    </style>
             
 </head>
 <body>
@@ -39,11 +52,11 @@
 
 <section id="testimonials" class="py-3">
     <div class="container1" >
-        <div class="details" >
+        <div class="details"  >
             <!--order details list-->
-           <div class="recentOrders">
-               <div class="cardHeader" style="font-weight: 600;">
-                   <h2 style="font-weight: 600;">Restaurants Available</h2>
+           <div class="recentOrders" style="background-color: gold;">
+               <div class="cardHeader" style="font-weight: 600; ">
+                   <h2 style="font-weight: 600;color: black;">Restaurants Available</h2>
                    
                </div>
                <table>
@@ -94,6 +107,27 @@
                     </tr>
                    </tbody>
                </table>
+           </div>
+           <div class="recentCustomers" style="background: gold;">
+            <div class="cardHeader">
+                <h2 style="color: black;">Filter</h2> 
+            </div>
+            <table id="recentcustomers">
+                <thead>
+                    <tr>
+                        <td>Restaurant Category</td>
+                </thead>
+                <tbody>
+                <tr style="display:grid; color: black;"> 
+                   <td><input type="radio" >category 1</td>
+                   <td><input type="radio" >category 2</td>
+                   <td><input type="radio" >category 3</td>
+                   <td><input type="radio" >category 4</td>
+                   <td><input type="radio" >category 5</td>
+                </tr>
+               
+            </tbody>
+            </table>
            </div>
     </div>
     </section>

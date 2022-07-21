@@ -5,13 +5,142 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KG Food Order | Restaurants-Menu</title>
+    <link rel="stylesheet" type="text/css" href="restaurantcss/restPanel.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!--<script src="dolphins.js"></script>-->
     <style>
         body{
-            background: #999;
+           background:#999;
+           color: black;  
+        }
+        td, tr {
+            color: black;
         }
     </style>
 </head>
 <body>
+    <header>
+        <a href="index.html" class="logo"><img src="logo.png"></a>
+
+    <nav class="navbar">
+        <a  href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="restaurant.html">Restaurants</a>
+        <a onclick="logoutFunction()">Log out</a> <!--temporarily-->
+        
+    </nav>
     
+      
+    
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            <i class="fas fa-search" id="search-icon"></i>
+            <a href="cart.html" class="fas fa-shopping-cart"></a>
+        </div>
+    
+    </header>
+    <section id="testimonials" class="py-3">
+        <div class="container1" >
+            <div class="details"  >
+                <!--order details list-->
+               <div class="recentOrders" style="background-color: gold;">
+                   <div class="cardHeader" style="font-weight: 600; ">
+                       <h2 style="font-weight: 600;color: black;">Our Menu</h2>
+                       
+                   </div>
+                   <table>
+                       <thead>
+                           <tr>
+                               <td>Food Name</td>
+                               <td>Food Category</td>
+                               <td>Food Price</td>
+                               <td>Qty</td>
+                               <td></td>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>Name 1</td>
+                               <td>Category 1</td>
+                               <td>Price 1</td>
+                               <td><input type="number" min="1"></td>
+                               <td><a href="cart.html" class="status delivered">Add to cart</a></td>
+                           </tr>
+                           <tr>
+                            <td>Name 2</td>
+                            <td>Category 2</td>
+                            <td>Price 2</td>
+                            <td><input type="number" min="1"></td>
+                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
+                        </tr>
+                        <tr>
+                            <td>Name 3</td>
+                            <td>Category 3</td>
+                            <td>Price 3</td>
+                            <td><input type="number" min="1"></td>
+                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
+                        </tr>
+                        <tr>
+                            <td>Name 4</td>
+                            <td>Category 4</td>
+                            <td>Price 4</td>
+                            <td><input type="number" min="1"></td>
+                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
+                        </tr>
+                        <tr>
+                            <td>Name 5</td>
+                            <td>Category 5</td>
+                            <td>Price 5</td>
+                            <td><input type="number" min="1"></td>
+                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
+                        </tr>
+                       </tbody>
+                   </table>
+               </div>
+               <div class="recentCustomers" style="background: gold;">
+                <div class="cardHeader">
+                    <h2 style="color: black;">Filter</h2> 
+                </div>
+                <table id="recentcustomers">
+                    <thead>
+                        <tr>
+                            <td style="color: black;">Food Category</td>
+                            <td>Food Price</td>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr style=" color: black;"> 
+                       <td><input type="radio" >category 1</td>
+                       <td><input type="radio" >a2al men 5$</td>
+                    </tr>
+                    <tr style=" color: black;"> 
+                        <td><input type="radio" >category 2</td>
+                        <td><input type="radio" >ben 5 w 10$</td>
+                     </tr>
+                     <tr style=" color: black;"> 
+                        <td><input type="radio" >category 3</td>
+                        <td><input type="radio" >aktr men 10$</td>
+                     </tr>
+                     <tr style=" color: black;"> 
+                        <td><input type="radio" >category 4</td>
+                        
+                     </tr>
+                     <tr style=" color: black;"> 
+                        <td><input type="radio" >category 5</td>
+                        
+                     </tr>
+                    </tbody>
+                </table>
+               </div>
+        </div>
+        </section>
+        <footer id="main-footer">
+            <p>KG Food Order  &copy; 2022, All Rights Reserved - Khalil Kahwaji & Georges AL Hajj </p>
+        </footer>
 </body>
 </html>
