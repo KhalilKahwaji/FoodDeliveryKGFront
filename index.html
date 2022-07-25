@@ -26,8 +26,16 @@ var username = sessionStorage.getItem("username")
 </head>
 <body>
 <header>
-
+<div>
     <a href="index.html" class="logo"><img src="logo.png"></a>
+<p style="color:white; font-weight: bolder; font-size: 15px;" id="hellowing"> </p>
+
+
+<script>var name1= sessionStorage.getItem("fname");
+document.getElementById("hellowing").innerHTML="Hello "+name1+"!";
+</script>
+</div>
+    
 
     <nav class="navbar">
         <a class="active" href="index.html">Home</a>

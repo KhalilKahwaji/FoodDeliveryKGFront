@@ -8,7 +8,7 @@ xhr.onreadystatechange = function () {
 
 
 
-    alert(xhr.responseText);
+    //alert(xhr.responseText);
         sessionStorage.removeItem("allitems");
         sessionStorage.removeItem("totalitems");
         sessionStorage.setItem("totalitems", myObj.length);

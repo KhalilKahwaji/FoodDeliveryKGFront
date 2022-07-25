@@ -321,6 +321,12 @@ header .icons #menu-bars{
     overflow: auto;
     padding: 0 20px;
 }
+.container2{
+    margin: auto; /* push to the middle */
+    max-width: 95%;
+    overflow: auto;
+    padding: 0 20px;
+}
 #testimonials {
     height: 100%;
     background:#999;
