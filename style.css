@@ -55,6 +55,7 @@ header .navbar a:hover{
 }
 
 header .icons i,
+header .icons button,
 header .icons a{
     cursor: pointer;
     margin-left: .5rem;
@@ -69,6 +70,7 @@ header .icons a{
 }
 
 header .icons i:hover,
+header .icons button:hover,
 header .icons a:hover{
     color:#fff;
     background: var(--light-color);
