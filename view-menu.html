@@ -29,6 +29,44 @@
     }
 
     </style>
+
+
+    <script>
+        const resId001= sessionStorage.getItem("currentViewMenuId");
+        
+
+
+    var xhr2 = new XMLHttpRequest();
+          xhr2.onreadystatechange = function () {
+              if (xhr2.readyState === 3) {
+                 
+                sessionStorage.setItem("itemCategories", xhr2.responseText);
+                  } 
+              }
+          
+          xhr2.open('get', 'http://localhost:5236/api/FoodCategory', true);
+          xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+          xhr2.send();
+        
+        //////////////////////////////
+        Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+    </script>
 </head>
 <body>
     <header>
@@ -38,7 +76,7 @@
         <a  href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="restaurant.html">Restaurants</a>
-        <a onclick="logoutFunction()">Log out</a> <!--temporarily-->
+        <!-- <a onclick="logoutFunction()">Log out</a> temporarily -->
         
     </nav>
     
@@ -46,8 +84,8 @@
     
         <div class="icons">
             <i class="fas fa-bars" id="menu-bars"></i>
-            <input type="search" placeholder="Search" aria-label="Search">
-            <button class="fas fa-search" id="search-icon" type="submit"></button>
+            <!-- <input type="search" placeholder="Search" aria-label="Search">
+            <button class="fas fa-search" id="search-icon" type="submit"></button> -->
             <a href="cart.html" class="fas fa-shopping-cart"></a>
         </div>
     
@@ -64,50 +102,92 @@
                    <table>
                        <thead>
                            <tr>
-                               <td>Food Name</td>
+                               <td >Food Name</td>
                                <td>Food Category</td>
-                               <td>Food Price</td>
-                               <td>Qty</td>
+                               <td>Item Price</td>
+                               <td>Quantity</td>
                                <td></td>
                            </tr>
                        </thead>
-                       <tbody>
-                           <tr>
+                       <tbody id="menuTable">
+                           <!-- <tr>
                                <td>Name 1</td>
                                <td>Category 1</td>
                                <td>Price 1</td>
                                <td><input type="number" min="1"></td>
                                <td><a href="cart.html" class="status delivered">Add to cart</a></td>
                            </tr>
-                           <tr>
-                            <td>Name 2</td>
-                            <td>Category 2</td>
-                            <td>Price 2</td>
-                            <td><input type="number" min="1"></td>
-                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
-                        </tr>
-                        <tr>
-                            <td>Name 3</td>
-                            <td>Category 3</td>
-                            <td>Price 3</td>
-                            <td><input type="number" min="1"></td>
-                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
-                        </tr>
-                        <tr>
-                            <td>Name 4</td>
-                            <td>Category 4</td>
-                            <td>Price 4</td>
-                            <td><input type="number" min="1"></td>
-                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
-                        </tr>
-                        <tr>
-                            <td>Name 5</td>
-                            <td>Category 5</td>
-                            <td>Price 5</td>
-                            <td><input type="number" min="1"></td>
-                            <td><a href="cart.html" class="status delivered">Add to cart</a></td>
-                        </tr>
+                           -->
                        </tbody>
+
+                       <script>
+                             var ITEMSCOUNT=0;
+                            const ITEMSID= new Array();
+                            var xhr = new XMLHttpRequest();
+                            xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 3) {
+                                    sessionStorage.setItem("allItems", xhr.responseText);
+                                    updateItems(xhr.responseText);
+                             }
+                            }
+            
+                            var str="http://localhost:5236/api/Items/GetMenu/";
+                            str+=resId001;
+                            xhr.open('get', str , true);
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                            xhr.send();
+                            
+
+                            function updateItems(itms){
+                    
+
+                           
+                                const menuTable= document.getElementById("menuTable");
+                                menuTable.innerHTML="";
+                                var myObj= JSON.parse(itms);
+                                 
+
+                                       for (let i = 0; i < myObj.length ; i++) {
+                                          var elm = menuTable.insertRow();
+                                            ITEMSCOUNT=myObj.length;   
+                                            ITEMSID[i]=myObj[i].itemid;
+// alert("id=\"qtty"+i+"\"")
+                                              for(let j=0; j<4; j++){
+                                                
+                                                  var col=elm.insertCell();
+                                                  switch(j){
+                                                      case 0: col.innerHTML="<td>"+myObj[i].name+"</td>";break;
+                                                      case 1: col.innerHTML="<td>"+getItemsCategory(myObj[i].categoryid)+"</td>";break;
+                                                      case 2: col.innerHTML="<td >$"+myObj[i].price+"</td>";col.id="price"+i;break;
+                                                      case 3: col.innerHTML="<td ><input id=\"qtty"+i+"\" type=\"number\" min=\"0\"></td>"; break;
+                                                      
+                                                      //case 4: col.innerHTML="<td><Button class=\"status delivered\"  id=\"menu"+myObj[i].restaurantid+"\"style=\"cursor:pointer;\" onclick=\"viewMenu("+myObj[i].restaurantid+")\">Add to Cart</Button>";break;
+                                                            
+                                                  }
+                                                
+                                            }
+                                       } 
+                              
+                            }
+
+                            function getItemsCategory(id){
+                                const jobjCat= JSON.parse(sessionStorage.getItem("itemCategories"));
+               // alert(sessionStorage.getItem("itemCategories"));
+
+                            for(let i=0; i<jobjCat.length; i++){
+
+                                if(id==jobjCat[i].categoryid){
+
+                                    return jobjCat[i].categoryname;
+
+                                }
+                            }
+                            return "not set";
+                            }
+
+                            
+            
+                       </script>
                    </table>
                </div>
                <div class="recentCustomers" style="background: gold;">
@@ -122,34 +202,146 @@
                             
                         </tr>
                     </thead>
-                    <tbody>
-                    <tr style=" color: black;"> 
+                    <tbody id="table2">
+                    <!-- <tr style=" color: black;"> 
                        <td><input type="radio" >category 1</td>
                       
-                    </tr>
-                    <tr style=" color: black;"> 
-                        <td><input type="radio" >category 2</td>
-                        
-                     </tr>
-                     <tr style=" color: black;"> 
-                        <td><input type="radio" >category 3</td>
-                        
-                     </tr>
-                     <tr style=" color: black;"> 
-                        <td><input type="radio" >category 4</td>
-                        
-                     </tr>
-                     <tr style=" color: black;"> 
-                        <td><input type="radio" >category 5</td>
-                        
-                     </tr>
+                    </tr> -->
+
                     </tbody>
+
+
+                    <script>
+                        const table2=document.getElementById("table2");
+                        const jobj= JSON.parse(sessionStorage.getItem("itemCategories"));
+                        for (let i = 0; i < jobj.length ; i++) {
+                            var elm2 = table2.insertRow();
+                            
+        
+                                 var coll=elm2.insertCell();
+                                 coll.innerHTML="  <td><input type=\"radio\" name=\"cat\" onClick=\"filterItems("+jobj[i].categoryid+")\"> "+jobj[i].categoryname+"</td>";
+                        }
+                           var elem3= table2.insertRow();
+                           var col3= elem3.insertCell();
+                           col3.innerHTML="   <td><button class=\"status canceled\" onClick=\"clearOptions()\">Clear</button></td>"; 
+        
+        
+                           function clearOptions(){
+        
+                            document.querySelector('input[name="cat"]:checked').checked = false;
+                            updateItems(sessionStorage.getItem("allItems"));
+        
+                           }
+        
+                           function filterItems(cat){
+                
+                            var xhr3 = new XMLHttpRequest();
+                                            xhr3.onreadystatechange = function () {
+                                                if (xhr3.readyState === 3) {
+                                                   
+                                                    updateItems(xhr3.responseText);
+                                                  
+                                                    } 
+                                                }
+                                            
+                                                var str= "http://localhost:5236/api/Items/GetMenuFiltered/";
+                                                str+=resId001;
+                                                str+="/";
+                                                str+=cat;
+                                                
+                                            xhr3.open('get', str, true);
+                                            xhr3.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                                            xhr3.send();
+        
+                                              }
+
+
+        
+                    </script>
+
+
+
                 </table>
                </div>
+               <button class="status placeOrder" onclick="placeOrder()" >Place Order</button>
+               <script>
+                //    {
+                //     "orderdetailid": 0,
+                //     "orderid": 0,
+                //     "statusid": 0,
+                //     "userid": 0,
+                //     "restaurantid": 0,
+                //     "dateoforder": "2022-07-28T16:03:25.011Z",
+                //     "itemid": 0,
+                //     "quantity": 0,
+                //     "price": 0,
+                //     "itemname": "string",
+                //     "customerFullName": "string"
+                //     }
+
+
+                function placeOrder(){
+
+                   
+                    for(let i=0; i< ITEMSCOUNT; i++){
+                        var tmp= document.getElementById("qtty"+i);
+                        
+                        if(tmp.value.length!=0 && !(tmp.value==0)){
+                            
+
+                        let xhr2 = new XMLHttpRequest();
+                        xhr2.open("POST", "http://localhost:5236/api/OrderDetail");
+                        xhr2.setRequestHeader("Accept", "application/json");
+                        xhr2.setRequestHeader("Content-Type", "application/json");
+
+                        // xhr2.onload = () =>  {
+                        //     var str= xhr2.response;
+                        //     //alert(str);
+                        //     //"Username already exists! 
+                            
+                        //     if(str.slice(1, 25)  =="Username already exists!"){
+                        //         alert(xhr2.response);
+
+                        //     }else if(str.slice(1,32)== "Phone number already registered"){
+                        //         //Phone number already registered to an account. Please use a different one.
+                        //         alert(xhr2.response);
+                        //     }else{
+                        //         alert("Restaurant created created successfully!");
+                        //         window.location.href = "login.html";  
+                        //     }
+                            
+                        // }
+                        let data = `{ 
+                "orderdetailid": 0,
+                "orderid": 0,
+                "statusid": 0, 
+                "dateoforder": "2022-07-28T16:52:44.439Z",
+                "itemname": "string",
+                "customerFullName": "string",
+                "userid": `+sessionStorage.getItem("userid")+`,
+                "restaurantid": `+resId001+`,
+                "itemid": `+ITEMSID[i]+`,
+                "quantity": `+tmp.value+`,
+                "price": `+document.getElementById("price"+i).innerHTML.substring(1)+`
+               
+                }`;
+                        //alert(data);
+                        xhr2.send(data);
+
+
+
+                        }
+                    }
+
+                }
+
+               </script>
+               <!-- order: userid, restaurantid 
+                    order detail: orderid, itemid, quantity, price-->
         </div>
         </section>
-        <footer id="main-footer">
+        <!-- <footer id="main-footer">
             <p>KG Food Order  &copy; 2022, All Rights Reserved - Khalil Kahwaji & Georges AL Hajj </p>
-        </footer>
+        </footer> -->
 </body>
 </html>

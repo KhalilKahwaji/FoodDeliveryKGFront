@@ -32,7 +32,7 @@ function updateItemsInSession(id){
 
             xhr2.onreadystatechange = function () {
                 if (xhr2.readyState === 3) {
-                    alert("ok")
+                    //alert("ok")
                 var myObj= JSON.parse(xhr2.responseText);
 
                     
