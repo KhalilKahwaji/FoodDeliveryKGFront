@@ -24,7 +24,7 @@ body{
     position: fixed;
     width: 300px;
     height: 100%;
-    background: var(--black1);
+    background:rgb(68, 0, 132);
     border-left: 10px solid var(--black1);
     transition: 0.5s;
     overflow: hidden;
@@ -62,7 +62,7 @@ body{
     width: 100%;
     display: flex;
     text-decoration: none;
-    color: var(--black2);
+    color:lime;
 }
 .navigation ul li:hover a
 {
@@ -87,6 +87,7 @@ body{
     line-height: 60px;
     text-align: start;
     white-space: nowrap;
+    color:lime;
 }
 
 .navigation ul li a.active{
@@ -126,13 +127,13 @@ body{
     width: calc(100% - 300px);
     left: 300px;
     min-height: 100vh;
-    background: var(--black2);
+    background:silver;
     transition: 0.5s;
 }
 .main.active{
     width: calc(100% - 80px);
     left: 80px;
-    background: var(--black2);
+    background:springgreen;
 }
 .topbar{
     width: 100%;
@@ -196,7 +197,7 @@ body{
 .cardBox{
     position: relative;
     width: 100%;
-    color: white;
+    color:lime;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -204,7 +205,7 @@ body{
 }
 .cardBox .card{
     position: relative;
-    background: var(--black1);
+    background:rgb(68, 0, 132);
     padding: 30px;
     border-radius: 20px;
     display: flex;
@@ -216,16 +217,16 @@ body{
     position: relative;
     font-weight: 500;
     font-size: 2.5em;
-    color: var(--white);
+    color:lime;
 }
 .cardBox .card .cardName{
     font-size: 1.1em;
-    color: var(--grey);
+    color:lime;
     margin-top: 5px;
 }
 .cardBox .card .iconBx{
     font-size: 3.5em;
-    color: var(--grey);
+    color:lime;
 }
 .cardBox .card:hover{
     background:#666666;
@@ -244,13 +245,13 @@ body{
     grid-template-columns: 2fr 1fr;
     grid-gap: 30px;
     /*margin-top: 10px;*/
-    color: white;
+    color:lime;
 }
 .details .recentOrders{
     position: relative;
     display: grid;
     min-height: 500px;
-    background: var(--black1);
+    background:rgb(68, 0, 132);
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0,0,0.08);
     border-radius: 20px;
@@ -262,7 +263,7 @@ body{
 }
 .cardHeader h2{
     font-weight: 600;
-    color: var(--white);
+    color:lime;
 }
 .btn{
     color:var(--black1);
@@ -281,7 +282,7 @@ body{
     font-weight: 600;
 }
 .details .recentOrders table tr{
-    color: var(--grey);
+    color:lime;
     border-bottom: 1px solid rgba(255, 255, 255, 255);
 }
 
@@ -333,7 +334,7 @@ body{
 .status.return
 {
     padding: 2px 4px;
-    background:blueviolet;
+    background:rgb(68, 0, 132);
     color: var(--white);
     border-radius: 4px;
     font-size: 14px;
@@ -342,8 +343,8 @@ body{
 .status.placeOrder
 {
     padding: 2px 4px;
-    background: gold;
-    color: var(--white);
+    background:teal;
+    color:black;
     border-radius: 4px;
     font-size: 14px;
     font-weight: 800;
@@ -355,7 +356,7 @@ body{
 .status.placeOrder:hover
 {
 
-    background: rgb(255, 255, 255);
+    background:gold;
     color: var(--black1);
 
 
@@ -374,7 +375,7 @@ body{
     display: grid;
     min-height: 500px;
     padding: 20px;
-    background: var(--black1);
+    background:rgb(68, 0, 132);
     box-shadow: 0 7px 25px rgba(0, 0,0,0.08);
     border-radius: 20px;
 }
@@ -393,7 +394,7 @@ body{
     object-fit: cover;
 }
 .recentCustomers table  tr:hover{
-    background: var(--black2);
+    background:rgb(68, 0, 132);
     color: var(--white);
 }
 .recentCustomers table  tr td{
