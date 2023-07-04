@@ -92,6 +92,8 @@ body{
 
 .navigation ul li a.active{
     background: var(--white);
+    border-radius: 5%;
+
 }
 
 .navigation ul li:hover a::before
